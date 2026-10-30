@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import ContactChannels from '../components/ContactChannels.astro';
 import { SERVICES, SITE } from '../lib/meta';
 ---
 
@@ -61,20 +62,18 @@ import { SERVICES, SITE } from '../lib/meta';
     </div>
   </section>
 
-  <section class="section dark" style="padding:clamp(80px,10vw,120px) 0">
-    <div class="wrap" style="text-align:center">
-      <div class="eyebrow rv">CONTACT</div>
-      <h2 class="h-section rv" style="--d:.08s;margin:14px 0 16px">现在就能找到我</h2>
-      <p class="sub rv" style="--d:.14s;max-width:480px;margin:0 auto">
-        服务方案还在打磨，但人一直在线。咨询意向、商务合作，
-        <strong style="color:var(--paper)">抖音私信</strong>是最快的通道——我每天都会看。
-      </p>
-      <div class="hero-ctas rv" style="--d:.2s;margin-top:34px;justify-content:center">
-        <a class="btn btn-primary" href={SITE.douyin} target="_blank" rel="noopener" data-mag>
-          抖音私信 @不睡觉变笨蛋 ↗
-        </a>
-        <a class="btn btn-ghost-light" href="/about/">先了解这个人</a>
+  <section class="section white" id="contact">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">CONTACT</div>
+          <h2 class="h-section" style="margin-top:10px">六个通道，随时找到我</h2>
+          <p class="sub" style="margin-top:12px">
+            服务方案还在打磨，但人一直在线：国内走抖音/微信/QQ，海外走 Telegram，要现货直接进小店。
+          </p>
+        </div>
       </div>
+      <ContactChannels />
     </div>
   </section>
 </Base>

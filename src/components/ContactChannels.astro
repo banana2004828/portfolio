@@ -1,0 +1,81 @@
+---
+import { SITE } from '../lib/meta';
+
+// 六大联系通道：抖音主推、微信复制、QQ 拉起、TG 跳转、小店现货、GitHub 开源
+---
+
+<div class="grid-cards contact-grid">
+  <a class="card card-glare rv" data-tilt href={SITE.douyin} target="_blank" rel="noopener">
+    <div class="chip chip-accent" style="margin-bottom:14px">主阵地 · 商务私信</div>
+    <h3 class="card-title">抖音私信</h3>
+    <p class="card-tagline">@不睡觉变笨蛋 · 咨询意向、商务合作，私信最快，我每天都会看。</p>
+    <div class="card-foot"><span class="link-more">去私信 <span aria-hidden="true">↗</span></span></div>
+  </a>
+
+  <div class="card card-glare rv" data-tilt style="--d:.06s">
+    <div class="chip" style="margin-bottom:14px">微信 · 复制加好友</div>
+    <h3 class="card-title" style="font-family:var(--font-mono);font-size:17px">{SITE.wechat}</h3>
+    <p class="card-tagline">点按钮复制微信号，打开微信搜索添加。备注来意，通过更快。</p>
+    <div class="card-foot">
+      <button class="btn btn-ghost-dark" style="padding:8px 18px;font-size:13px" data-copy={SITE.wechat}>复制微信号</button>
+    </div>
+  </div>
+
+  <a class="card card-glare rv" data-tilt style="--d:.12s"
+     href={`https://wpa.qq.com/msgrd?v=3&uin=${SITE.qq}&site=qq&menu=yes`} target="_blank" rel="noopener">
+    <div class="chip" style="margin-bottom:14px">QQ · 点击拉起聊天</div>
+    <h3 class="card-title" style="font-family:var(--font-mono);font-size:17px">{SITE.qq}</h3>
+    <p class="card-tagline">常驻在线，点卡片直接拉起 QQ 临时会话，手机电脑都行。</p>
+    <div class="card-foot"><span class="link-more">QQ 聊我 <span aria-hidden="true">↗</span></span></div>
+  </a>
+
+  <a class="card card-glare rv" data-tilt style="--d:.18s" href={SITE.telegram} target="_blank" rel="noopener">
+    <div class="chip" style="margin-bottom:14px">Telegram · 境外通道</div>
+    <h3 class="card-title" style="font-family:var(--font-mono);font-size:17px">{SITE.telegramHandle}</h3>
+    <p class="card-tagline">海外朋友和跨境业务走这里，点击直达我的 TG 私聊。</p>
+    <div class="card-foot"><span class="link-more">Telegram 聊我 <span aria-hidden="true">↗</span></span></div>
+  </a>
+
+  <a class="card card-glare rv" data-tilt style="--d:.24s" href={SITE.shop} target="_blank" rel="noopener">
+    <div class="chip chip-accent" style="margin-bottom:14px">AI 小店 · 现货直购</div>
+    <h3 class="card-title">AI 会员代充 ↗</h3>
+    <p class="card-tagline">ChatGPT Plus / Go、Grok、Muse 充值，24h 自动发货，掉订阅按天数退款。</p>
+    <div class="card-foot"><span class="link-more">进店逛逛 <span aria-hidden="true">↗</span></span></div>
+  </a>
+
+  <a class="card card-glare rv" data-tilt style="--d:.3s" href={SITE.github} target="_blank" rel="noopener">
+    <div class="chip" style="margin-bottom:14px">GitHub · 开源</div>
+    <h3 class="card-title">@banana2004828 ↗</h3>
+    <p class="card-tagline">缝合怪、熊爪采集器等开源工具与方法论的仓库，随便用。</p>
+    <div class="card-foot"><span class="link-more">看仓库 <span aria-hidden="true">↗</span></span></div>
+  </a>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.getAttribute('data-copy') || '';
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      const orig = btn.textContent;
+      btn.textContent = '已复制 ✓';
+      setTimeout(() => {
+        btn.textContent = orig;
+      }, 1600);
+    });
+  });
+</script>
+
+<style>
+  .contact-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+</style>

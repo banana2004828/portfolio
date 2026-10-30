@@ -45,6 +45,10 @@ export const SITE = {
   douyin: 'https://www.douyin.com/user/MS4wLjABAAAA8OZfJY3sBzdYY5wIRLrnhvYoA5WofWH6flHqBoywcbQ',
   github: 'https://github.com/banana2004828',
   shop: 'https://manboweb3.com/r/5K822X',
+  qq: '1617248406',
+  wechat: 'wyyyy040828',
+  telegram: 'https://t.me/rolrrncnlpeil',
+  telegramHandle: '@rolrrncnlpeil',
 };
 
 export const SERVICES = [
