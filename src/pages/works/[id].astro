@@ -25,7 +25,7 @@ const related = (await getCollection('works'))
 <Base title={title} description={tagline}>
   <article class="light" style="min-height:100vh">
     <div class="wrap wrap-narrow detail-hero">
-      <a class="breadcrumb rv in" href="/works/">← 返回作品广场</a>
+      <a class="breadcrumb rv in" href="/works/">← 返回工具库</a>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
         <span class="chip chip-accent">{cat.cn}</span>
         <span class:list={['chip', { 'chip-dot': status === 'brewing' }]}>{STATUS[status]}</span>
@@ -63,7 +63,7 @@ const related = (await getCollection('works'))
 
     {related.length > 0 && (
       <div class="wrap" style="padding-bottom:110px">
-        <h3 class="h-3" style="margin-bottom:22px">同板块的其他作品</h3>
+        <h3 class="h-3" style="margin-bottom:22px">同板块的其他工具</h3>
         <div class="grid-cards">
           {related.map((w) => (
             <article class="card">

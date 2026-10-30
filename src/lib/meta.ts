@@ -41,7 +41,7 @@ export const SITE = {
   latin: 'SLEEPLESS EGG',
   tagline: '把方法论，缝成工具。',
   description:
-    '不睡觉变笨蛋的个人作品集：完整应用、命令行工具、Agent 技能、提示词与方法论。一个 AI 重度实践者，把踩过的坑变成工具和方法。',
+    '不睡觉变笨蛋的个人工具库：完整应用、命令行工具、Agent 技能、提示词与方法论。一个 AI 重度实践者，把踩过的坑变成工具和方法。',
   douyin: 'https://www.douyin.com/user/MS4wLjABAAAA8OZfJY3sBzdYY5wIRLrnhvYoA5WofWH6flHqBoywcbQ',
   github: 'https://github.com/banana2004828',
 };
