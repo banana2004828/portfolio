@@ -1,0 +1,52 @@
+---
+import { CATEGORIES, STATUS } from '../lib/meta';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  work: CollectionEntry<'works'>;
+  wide?: boolean;
+  solo?: boolean;
+  delay?: number;
+}
+
+const { work, wide = false, solo = false, delay = 0 } = Astro.props;
+const { title, tagline, status, tags, github, cover, category } = work.data;
+const cat = CATEGORIES[category];
+---
+
+<article
+  class:list={['card', 'card-glare', 'rv', { 'card-wide': wide, 'card-solo': solo }]}
+  data-tilt
+  style={`--d:${delay}s`}
+>
+  {cover && (
+    <div class="card-cover">
+      <img src={cover} alt={`${title} 截图`} loading="lazy" width="1120" height="700" />
+    </div>
+  )}
+  <div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+      <span class="chip chip-accent">{cat.cn}</span>
+      <span class:list={['chip', { 'chip-dot': status === 'brewing' }]}>{STATUS[status]}</span>
+      {tags.slice(0, 2).map((t) => <span class="chip">{t}</span>)}
+    </div>
+    <h3 class="card-title">{title}</h3>
+    <p class="card-tagline">{tagline}</p>
+    <div class="card-foot">
+      <a class="link-more" href={`/works/${work.id}/`}>
+        查看详情 <span aria-hidden="true">→</span>
+      </a>
+      {github && (
+        <a
+          class="link-more"
+          style="color:var(--ink-2)"
+          href={github}
+          target="_blank"
+          rel="noopener"
+        >
+          GitHub <span aria-hidden="true">↗</span>
+        </a>
+      )}
+    </div>
+  </div>
+</article>

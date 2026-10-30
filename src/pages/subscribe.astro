@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="订阅" description="免费看个热闹，订阅拿走全部：提示词、手册、模板完整版，持续更新。">
+  <header class="dark" style="padding:160px 0 80px;text-align:center">
+    <div class="wrap wrap-narrow">
+      <div class="eyebrow rv in">SUBSCRIBE</div>
+      <h1 class="h-display rv in" style="font-size:clamp(2.2rem,5.4vw,4rem);margin-top:14px">
+        免费看个热闹，<br />订阅<span class="grad-text">拿走全部</span>。
+      </h1>
+      <p class="sub rv in" style="margin:20px auto 0;max-width:520px">
+        作品介绍和方法论导览永远免费。订阅解锁的是直接可用的完整版——拿来就能跑的那种。
+      </p>
+    </div>
+  </header>
+
+  <section class="section light">
+    <div class="wrap">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:860px;margin-inline:auto">
+        <div class="card rv" style="--d:.05s">
+          <div class="chip" style="margin-bottom:18px">免费 · 蛋友</div>
+          <div style="font-size:2.6rem;font-weight:800;letter-spacing:-.02em">¥0</div>
+          <p class="card-tagline" style="margin-top:8px">白嫖党友好，永远开放。</p>
+          <hr style="border:none;border-top:1px solid var(--hairline-light);margin:20px 0" />
+          <ul class="prose" style="list-style:none;padding:0;font-size:14.5px">
+            <li>✓ 全部作品介绍与方法论导览</li>
+            <li>✓ GitHub 上所有开源项目</li>
+            <li>✓ 免费版方法论文章（如缝合怪六步工作流）</li>
+            <li>✓ 抖音日常实战更新</li>
+          </ul>
+        </div>
+
+        <div class="card rv" style="--d:.12s;border:2px solid var(--accent);position:relative">
+          <span class="chip chip-accent" style="position:absolute;top:-13px;right:20px;background:#fff">即将上线</span>
+          <div class="chip chip-accent" style="margin-bottom:18px">订阅 · 会员</div>
+          <div style="font-size:2.6rem;font-weight:800;letter-spacing:-.02em">
+            ¥<span class="grad-text">待定</span>
+            <span style="font-size:14px;font-weight:600;color:var(--ink-2)">/月</span>
+          </div>
+          <p class="card-tagline" style="margin-top:8px">给真正要用起来的人。</p>
+          <hr style="border:none;border-top:1px solid var(--hairline-light);margin:20px 0" />
+          <ul class="prose" style="list-style:none;padding:0;font-size:14.5px">
+            <li>✓ <strong>Prompt 资产库完整版</strong>（持续更新）</li>
+            <li>✓ 缝合怪全套模板与判定表</li>
+            <li>✓ vibecoding 实战笔记完整版（整理完成即推送）</li>
+            <li>✓ 自动化工作流的提示词合集</li>
+            <li>✓ 新内容第一时间解锁</li>
+          </ul>
+          <button class="btn btn-primary btn-disabled" style="margin-top:24px;width:100%;justify-content:center" disabled>
+            支付通道接好后开放
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section white" style="padding-top:0">
+    <div class="wrap wrap-narrow">
+      <h2 class="h-3 rv" style="margin-bottom:10px">常见问题</h2>
+      <div class="prose rv" style="--d:.08s">
+        <h3 style="font-size:1.05rem">什么时候上线？</h3>
+        <p>
+          支付通道（国内爱发电 / 海外国际通道）接好后第一时间开放，消息会先在
+          <a href="https://www.douyin.com/user/MS4wLjABAAAA8OZfJY3sBzdYY5wIRLrnhvYoA5WofWH6flHqBoywcbQ" target="_blank" rel="noopener">抖音</a>公布。
+        </p>
+        <h3 style="font-size:1.05rem">订阅里具体有什么？</h3>
+        <p>
+          见上方清单。核心是 <a href="/works/prompt-vault/">Prompt 资产库</a>：所有提示词、模板、手册的完整可运行版本。
+        </p>
+        <h3 style="font-size:1.05rem">不等上线，现在能白嫖什么？</h3>
+        <p>
+          <a href="/works/suture-workflow/">缝合怪六步工作流</a>全文免费；
+          <a href="https://github.com/banana2004828" target="_blank" rel="noopener">GitHub</a>
+          上四个开源仓库随便用。先看清楚再决定，是我的原则。
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

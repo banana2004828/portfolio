@@ -1,0 +1,212 @@
+---
+import Base from '../layouts/Base.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { CATEGORIES, SITE } from '../lib/meta';
+import { getCollection } from 'astro:content';
+
+const all = (await getCollection('works')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const byCat = (c: string) => all.filter((w) => w.data.category === c);
+const featured = all.filter((w) => w.data.featured);
+const brewing = all.filter((w) => w.data.status === 'brewing');
+
+const marqueeItems = [
+  'VIBECODING', 'CODEX', 'AI AGENT', 'PYTHON', 'GO', 'AUTOMATION',
+  'PROMPT ENGINEERING', '小红书运营', '自媒体', '电商', '方法论', '开源',
+];
+const stats = [
+  { num: '4', label: '个开源仓库' },
+  { num: '1', label: '个完整工作台' },
+  { num: '6', label: '步调研方法论' },
+  { num: '1', label: '只睡着的蛋' },
+];
+---
+
+<Base>
+  <!-- ================= HERO（深色） ================= -->
+  <header class="hero dark">
+    <div class="hero-bg"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-mark" aria-hidden="true">蛋</div>
+    <div class="hero-inner">
+      <img
+        class="hero-avatar rv"
+        src="/images/avatar.jpg"
+        alt="不睡觉变笨蛋的头像"
+        width="116"
+        height="116"
+        style="--d:.05s"
+      />
+      <span class="hero-pill rv" style="--d:.15s">{SITE.latin} · 个人作品集</span>
+      <h1 class="h-display rv" style="--d:.25s">
+        把方法论，<span class="grad-text" style="white-space:nowrap">缝成工具</span>。
+      </h1>
+      <p class="sub hero-sub rv" style="--d:.35s">
+        你好，我是不睡觉变笨蛋，一个 AI
+        重度实践者。白天解决业务问题，晚上把它们变成工具、skill
+        和方法论，全部放在这里。
+      </p>
+      <div class="hero-ctas rv" style="--d:.45s">
+        <a class="btn btn-primary" href="/works/" data-mag>看看作品</a>
+        <a class="btn btn-ghost-light" href="/subscribe/" data-mag>订阅更新</a>
+      </div>
+      <p class="hero-note rv" style="--d:.55s">说不睡觉的是我，头像里睡着的也是我。</p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"></div>
+  </header>
+
+  <!-- ================= 跑马灯 ================= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {[0, 1].map(() =>
+        marqueeItems.map((m) => <span class="marquee-item">{m}</span>)
+      )}
+    </div>
+  </div>
+
+  <!-- ================= 数据（白） ================= -->
+  <section class="section white">
+    <div class="wrap">
+      <div class="stats">
+        {stats.map((s, i) => (
+          <div class="rv" style={`--d:${i * 0.08}s`}>
+            <div class="stat-num">{s.num}</div>
+            <div class="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 作品板块（明暗交替） ================= -->
+  {
+    ['apps', 'cli', 'skills', 'methodology'].map((cat, idx) => {
+      const works = byCat(cat);
+      const meta = CATEGORIES[cat];
+      const tone = idx % 2 === 0 ? 'light' : 'white';
+      if (cat === 'methodology') {
+        return (
+          <section class={`section ${tone}`} id={cat}>
+            <div class="wrap">
+              <div class="section-head rv">
+                <div>
+                  <div class="eyebrow">{meta.en}</div>
+                  <h2 class="h-section" style="margin-top:10px">{meta.cn}</h2>
+                  <p class="sub" style="margin-top:12px">{meta.desc}</p>
+                </div>
+                <span class="count-badge">{works.length} 篇</span>
+              </div>
+              <div>
+                {works.map((w, i) => (
+                  <a class="method-row rv" style={`--d:${i * 0.06}s`} href={`/works/${w.id}/`}>
+                    <div class="method-idx">{String(i + 1).padStart(2, '0')}</div>
+                    <div>
+                      <div class="method-title">{w.data.title}</div>
+                      <div class="method-desc">{w.data.tagline}</div>
+                    </div>
+                    <div class="card-foot">
+                      <span class="chip">{w.data.status === 'brewing' ? '整理中' : '免费'}</span>
+                      <span class="link-more">阅读 <span aria-hidden="true">→</span></span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+      return (
+        <section class={`section ${tone}`} id={cat}>
+          <div class="wrap">
+            <div class="section-head rv">
+              <div>
+                <div class="eyebrow">{meta.en}</div>
+                <h2 class="h-section" style="margin-top:10px">{meta.cn}</h2>
+                <p class="sub" style="margin-top:12px">{meta.desc}</p>
+              </div>
+              <span class="count-badge">{works.length} 件</span>
+            </div>
+            <div class="grid-cards">
+              {works.map((w, i) => (
+                <WorkCard
+                  work={w}
+                  solo={works.length === 1 && !!w.data.cover}
+                  wide={works.length > 1 && w.data.featured}
+                  delay={i * 0.07}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    })
+  }
+
+  <!-- ================= WIP（深色窄带） ================= -->
+  <section class="section dark" style="padding:84px 0">
+    <div class="wrap" style="text-align:center">
+      <div class="eyebrow rv">IN PROGRESS</div>
+      <h2 class="h-section rv" style="--d:.1s;margin:12px 0 40px">还在锅里</h2>
+      <div class="wip-list">
+        {brewing.map((w, i) => (
+          <a class="wip-item rv" style={`--d:${0.15 + i * 0.08}s`} href={`/works/${w.id}/`}>
+            <span class="chip-dot" style="color:var(--accent);display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor"></span>
+            {w.data.title}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 订阅（深色） ================= -->
+  <section class="dark" style="padding:clamp(90px,12vw,150px) 0 130px">
+    <div class="wrap">
+      <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,6vw,72px);align-items:center" class="sub-grid">
+        <div>
+          <div class="eyebrow rv">SUBSCRIBE</div>
+          <h2 class="h-section rv" style="--d:.08s;margin:14px 0 18px;font-size:clamp(2rem,4.6vw,3.2rem)">
+            免费看个热闹，<br />订阅<span class="grad-text">拿走全部</span>。
+          </h2>
+          <p class="sub rv" style="--d:.16s;max-width:440px">
+            全部提示词、手册、模板的完整版都在订阅库里，持续更新。
+            作品介绍和方法论导览永远免费——先看清楚，再决定要不要。
+          </p>
+          <div class="hero-ctas rv" style="--d:.24s;margin-top:32px;justify-content:flex-start">
+            <a class="btn btn-primary btn-disabled" href="/subscribe/" aria-disabled="true">加入订阅 · 即将上线</a>
+            <a class="btn btn-ghost-light" href="/works/methodology/suture-workflow/">先免费看一篇</a>
+          </div>
+        </div>
+        <div class="rv" style="--d:.2s">
+          <div class="lock-demo">
+            <div class="lock-demo-bar"><i></i><i></i><i></i></div>
+            <div class="lock-demo-body">
+              <div><span class="cm"># 角色设定</span></div>
+              <div>你是一名资深的开源项目调研专家，</div>
+              <div>擅长用公开信号快速定优劣……</div>
+              <div class="lock-blur">
+                <div>第五步 · 底座选择的判定表如下：</div>
+                <div>维度A 权重0.3 —— <span class="kw">架构契合度</span></div>
+                <div>维度B 权重0.25 —— 许可证兼容</div>
+                <div>维度C 权重0.2 —— 迁移成本……</div>
+              </div>
+            </div>
+            <div class="lock-overlay">
+              <div class="lock-icon">🔒</div>
+              <div style="font-size:13px;font-weight:600;color:rgba(245,245,247,.85)">订阅解锁完整版</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width: 820px) {
+      .sub-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</Base>

@@ -1,0 +1,81 @@
+---
+import Base from '../../layouts/Base.astro';
+import { CATEGORIES, STATUS } from '../../lib/meta';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+  return works.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, tagline, category, status, tags, github, cover } = entry.data;
+const cat = CATEGORIES[category];
+
+const related = (await getCollection('works'))
+  .filter((w) => w.data.category === category && w.id !== entry.id)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 2);
+---
+
+<Base title={title} description={tagline}>
+  <article class="light" style="min-height:100vh">
+    <div class="wrap wrap-narrow detail-hero">
+      <a class="breadcrumb rv in" href="/works/">← 返回作品广场</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+        <span class="chip chip-accent">{cat.cn}</span>
+        <span class:list={['chip', { 'chip-dot': status === 'brewing' }]}>{STATUS[status]}</span>
+        {tags.map((t) => <span class="chip">{t}</span>)}
+      </div>
+      <h1 class="h-section rv in">{title}</h1>
+      <p class="sub" style="margin-top:16px">{tagline}</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px">
+        {github && (
+          <a class="btn btn-ghost-dark" style="padding:11px 22px;font-size:14px" href={github} target="_blank" rel="noopener">
+            GitHub 仓库 ↗
+          </a>
+        )}
+      </div>
+    </div>
+
+    {cover && (
+      <div class="wrap" style="margin-bottom:20px">
+        <img
+          src={cover}
+          alt={`${title} 截图`}
+          style="border-radius:20px;border:1px solid rgba(0,0,0,.08);box-shadow:0 30px 80px rgba(0,0,0,.12)"
+          width="1120"
+          height="700"
+        />
+      </div>
+    )}
+
+    <div class="wrap wrap-narrow" style="padding-bottom:80px">
+      <hr style="border:none;border-top:1px solid var(--hairline-light);margin:34px 0 10px" />
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+
+    {related.length > 0 && (
+      <div class="wrap" style="padding-bottom:110px">
+        <h3 class="h-3" style="margin-bottom:22px">同板块的其他作品</h3>
+        <div class="grid-cards">
+          {related.map((w) => (
+            <article class="card">
+              <h4 class="card-title">{w.data.title}</h4>
+              <p class="card-tagline">{w.data.tagline}</p>
+              <div class="card-foot">
+                <a class="link-more" href={`/works/${w.id}/`}>查看详情 <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    )}
+  </article>
+</Base>

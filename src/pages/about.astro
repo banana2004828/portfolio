@@ -1,0 +1,99 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/meta';
+---
+
+<Base title="关于我" description="不睡觉变笨蛋：AI 重度实践者，正在把方法论变成工具。">
+  <header class="dark" style="padding:160px 0 90px">
+    <div class="wrap" style="display:flex;gap:36px;align-items:center;flex-wrap:wrap">
+      <img
+        class="rv in"
+        src="/images/avatar.jpg"
+        alt="不睡觉变笨蛋的头像"
+        style="width:132px;height:132px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,179,0,.9);box-shadow:0 0 70px rgba(255,160,0,.3)"
+        width="132"
+        height="132"
+      />
+      <div>
+        <div class="eyebrow rv in">ABOUT</div>
+        <h1 class="h-display rv in" style="font-size:clamp(2.2rem,5vw,3.6rem);margin-top:10px">
+          不睡觉<span class="grad-text">变笨蛋</span>
+        </h1>
+        <p class="sub rv in" style="margin-top:10px">
+          白天搞业务，晚上搞 AI，中间偶尔睡觉。
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section class="section white">
+    <div class="wrap wrap-narrow">
+      <div class="eyebrow rv">我是谁</div>
+      <h2 class="h-section rv" style="--d:.08s;margin:12px 0 24px">业务一线，AI 一线。</h2>
+      <div class="prose rv" style="--d:.14s">
+        <p>
+          我是那种为了解决自己业务里的具体问题，一个猛子扎进 AI 里的实践者。
+          运营、电商、自媒体、投放，这些是我白天真正在打的仗；
+          Codex、agent 工作流、浏览器自动化，是我晚上磨的刀。
+        </p>
+        <p>
+          折腾久了发现一件事：<strong>踩过的坑只要肯整理，就是方法论；方法论只要肯动手，就是工具。</strong>
+          于是有了这个站——把我为自己做的东西，一件件摆出来给你看。
+        </p>
+        <p>
+          「不睡觉变笨蛋」是我的抖音 ID，也是个自嘲：明知道不睡觉会变笨，还是想把喜欢的东西做出来。
+          头像即本体。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="wrap wrap-narrow">
+      <div class="eyebrow rv">信条</div>
+      <h2 class="h-section rv" style="--d:.08s;margin:12px 0 34px">三条底线</h2>
+      <div class="rv" style="--d:.14s">
+        <div class="method-row" style="background:transparent">
+          <div class="method-idx">01</div>
+          <div>
+            <div class="method-title">方法论先于工具</div>
+            <div class="method-desc">先想清楚流程，再让 AI 落地。工具会过时，想得清楚的能力不会。</div>
+          </div>
+        </div>
+        <div class="method-row" style="background:transparent">
+          <div class="method-idx">02</div>
+          <div>
+            <div class="method-title">结论必须附证据</div>
+            <div class="method-desc">我推荐的东西都附仓库和链接，你可以自己验证——包括这条。</div>
+          </div>
+        </div>
+        <div class="method-row" style="background:transparent">
+          <div class="method-idx">03</div>
+          <div>
+            <div class="method-title">先跑通闭环，再谈规模</div>
+            <div class="method-desc">哪怕 25 元的一单，也要是完整跑通的真实闭环，而不是 PPT 里的市场规模。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section white" style="padding-bottom:130px">
+    <div class="wrap wrap-narrow">
+      <div class="eyebrow rv">找我</div>
+      <h2 class="h-section rv" style="--d:.08s;margin:12px 0 34px">外面的我</h2>
+      <div class="grid-cards rv" style="--d:.14s">
+        <a class="card" href={SITE.douyin} target="_blank" rel="noopener">
+          <div class="chip chip-accent" style="margin-bottom:16px">抖音</div>
+          <h3 class="card-title">@不睡觉变笨蛋 ↗</h3>
+          <p class="card-tagline">日常更新 vibecoding 实战：Codex 玩法、agent 工作流、自动化变现的真实过程。</p>
+        </a>
+        <a class="card" href={SITE.github} target="_blank" rel="noopener">
+          <div class="chip chip-accent" style="margin-bottom:16px">GitHub</div>
+          <h3 class="card-title">@banana2004828 ↗</h3>
+          <p class="card-tagline">开源工具与方法论的仓库：缝合怪、熊爪采集器、千问视觉工作流都在这里。</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

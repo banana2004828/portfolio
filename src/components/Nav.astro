@@ -1,0 +1,23 @@
+---
+import { SITE } from '../lib/meta';
+const path = Astro.url.pathname;
+const active = (p: string) =>
+  p === '/' ? path === '/' : path.startsWith(p);
+const linkStyle = (p: string) =>
+  active(p) ? 'color:#fff' : '';
+---
+
+<div class="nav-shell">
+  <nav class="nav" aria-label="主导航">
+    <a class="nav-brand" href="/">
+      <img src="/images/avatar.jpg" alt="{SITE.name}头像" width="28" height="28" />
+      <span>{SITE.name}</span>
+    </a>
+    <div class="nav-links">
+      <a href="/" style={linkStyle('/')}>首页</a>
+      <a href="/works/" style={linkStyle('/works')}>作品</a>
+      <a href="/about/" style={linkStyle('/about')}>关于</a>
+    </div>
+    <a class="nav-cta" href="/subscribe/" data-mag>订阅</a>
+  </nav>
+</div>

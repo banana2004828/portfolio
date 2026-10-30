@@ -1,0 +1,40 @@
+---
+import { SITE } from '../lib/meta';
+---
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="/images/avatar.jpg" alt="{SITE.name}头像" width="40" height="40" />
+          <div>
+            <div style="color:#f5f5f7;font-weight:700">{SITE.name}</div>
+            <div style="font-size:12px;letter-spacing:.18em;color:rgba(245,245,247,.4)">
+              {SITE.latin} · PERSONAL LAB
+            </div>
+          </div>
+        </div>
+        <p style="font-size:14px;max-width:300px">
+          把方法论，缝成工具。白天解决业务问题，晚上把它们变成工具、skill 和方法论。
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>导航</h4>
+        <a href="/">首页</a>
+        <a href="/works/">作品广场</a>
+        <a href="/about/">关于我</a>
+        <a href="/subscribe/">订阅</a>
+      </div>
+      <div class="footer-col">
+        <h4>外面的我</h4>
+        <a href={SITE.douyin} target="_blank" rel="noopener">抖音 ↗</a>
+        <a href={SITE.github} target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 {SITE.name} · 做工具，也做笨蛋。</span>
+      <span>Built with Astro · 头像即 Logo</span>
+    </div>
+  </div>
+</footer>

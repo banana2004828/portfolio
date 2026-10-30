@@ -1,0 +1,79 @@
+---
+import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import { CATEGORIES } from '../../lib/meta';
+import { getCollection } from 'astro:content';
+
+const all = (await getCollection('works')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const cats = ['apps', 'cli', 'skills', 'methodology', 'wip'];
+---
+
+<Base title="作品广场" description="不睡觉变笨蛋的全部作品：完整应用、命令行与自动化工具、Agent 技能、提示词与方法论。">
+  <header class="light" style="padding:150px 0 30px">
+    <div class="wrap">
+      <div class="eyebrow rv">WORKS</div>
+      <h1 class="h-section rv" style="--d:.08s;margin-top:12px">作品广场</h1>
+      <p class="sub rv" style="--d:.16s;margin-top:12px;max-width:560px">
+        五个板块，按类型整理清楚。工具是用来跑的，方法论是用来抄的。
+      </p>
+    </div>
+  </header>
+
+  <nav class="cat-nav" aria-label="分类导航">
+    <div class="wrap" style="display:flex;gap:8px;width:100%;max-width:none">
+      {cats.map((c) => <a href={`#${c}`}>{CATEGORIES[c].cn}</a>)}
+    </div>
+  </nav>
+
+  {
+    cats.map((cat, idx) => {
+      const works = all.filter((w) => w.data.category === cat);
+      const meta = CATEGORIES[cat];
+      const tone = idx % 2 === 0 ? 'light' : 'white';
+      return (
+        <section class={`section ${tone}`} id={cat} style="scroll-margin-top:120px">
+          <div class="wrap">
+            <div class="section-head rv">
+              <div>
+                <div class="eyebrow">{meta.en}</div>
+                <h2 class="h-section" style="margin-top:10px">{meta.cn}</h2>
+                <p class="sub" style="margin-top:12px">{meta.desc}</p>
+              </div>
+              <span class="count-badge">{cat === 'methodology' ? `${works.length} 篇` : `${works.length} 件`}</span>
+            </div>
+            {cat === 'methodology' ? (
+              <div>
+                {works.map((w, i) => (
+                  <a class="method-row rv" style={`--d:${i * 0.06}s`} href={`/works/${w.id}/`}>
+                    <div class="method-idx">{String(i + 1).padStart(2, '0')}</div>
+                    <div>
+                      <div class="method-title">{w.data.title}</div>
+                      <div class="method-desc">{w.data.tagline}</div>
+                    </div>
+                    <div class="card-foot">
+                      <span class="chip">{w.data.status === 'brewing' ? '整理中' : '免费'}</span>
+                      <span class="link-more">阅读 <span aria-hidden="true">→</span></span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <div class="grid-cards">
+                {works.map((w, i) => (
+                  <WorkCard
+                    work={w}
+                    solo={works.length === 1 && !!w.data.cover}
+                    wide={works.length > 1 && w.data.featured}
+                    delay={i * 0.07}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    })
+  }
+</Base>
