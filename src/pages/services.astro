@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import { SERVICES, SITE } from '../lib/meta';
+---
+
+<Base title="我的服务" description="AI 实战咨询、陪跑服务、AI 会员小店——不睡觉变笨蛋的核心业务。">
+  <header class="dark" style="padding:160px 0 90px;text-align:center">
+    <div class="wrap wrap-narrow">
+      <div class="eyebrow rv in">SERVICES · 核心业务</div>
+      <h1 class="h-display rv in" style="font-size:clamp(2.2rem,5.4vw,4rem);margin-top:14px">
+        真实业务里跑通的，<br />才能<span class="grad-text">卖给你</span>。
+      </h1>
+      <p class="sub rv in" style="margin:20px auto 0;max-width:560px">
+        我不开空头支票：每一项服务背后，都是我自己先跑过一遍的东西。
+        咨询和陪跑的付费方案正在整理，先看看方向对不对你的胃口。
+      </p>
+    </div>
+  </header>
+
+  <section class="section light">
+    <div class="wrap" style="display:grid;gap:28px;max-width:860px">
+      {SERVICES.map((s, i) => (
+        <article class="card card-glare rv" style={`--d:${i * 0.08}s`} data-tilt>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
+            <span class="method-idx" style="font-size:22px">{s.idx}</span>
+            <span class="chip chip-accent">{s.en}</span>
+            <span class:list={['chip', { 'chip-dot': s.brewing }]}>{s.badge}</span>
+          </div>
+          <h2 class="h-3">{s.cn}</h2>
+          <p style="font-weight:600;margin:8px 0 10px;font-size:15.5px">{s.headline}</p>
+          <p class="card-tagline">{s.desc}</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0 22px" class="svc-cols">
+            <div>
+              <div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--ink-2);margin-bottom:8px">适合谁</div>
+              <ul class="prose" style="list-style:none;padding:0;font-size:13.5px;color:var(--ink-2)">
+                {s.fit.map((f) => <li>· {f}</li>)}
+              </ul>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--ink-2);margin-bottom:8px">交付方式</div>
+              <div style="font-size:13.5px;color:var(--ink-2)">{s.delivery}</div>
+              <div style="font-size:13.5px;color:var(--ink-2);margin-top:6px">价格：<strong>方案整理中</strong></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            {s.brewing ? (
+              <>
+                <button class="btn btn-ghost-dark btn-disabled" style="padding:11px 22px;font-size:14px" disabled>预约通道 · 即将开放</button>
+                <a class="btn btn-ghost-dark" style="padding:11px 22px;font-size:14px" href={SITE.douyin} target="_blank" rel="noopener">
+                  抖音先聊聊 ↗
+                </a>
+              </>
+            ) : (
+              <a class="btn btn-primary" style="padding:11px 26px;font-size:14px" href={SITE.shop} target="_blank" rel="noopener" data-mag>
+                进店现货直购 ↗
+              </a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section dark" style="padding:clamp(80px,10vw,120px) 0">
+    <div class="wrap" style="text-align:center">
+      <div class="eyebrow rv">CONTACT</div>
+      <h2 class="h-section rv" style="--d:.08s;margin:14px 0 16px">现在就能找到我</h2>
+      <p class="sub rv" style="--d:.14s;max-width:480px;margin:0 auto">
+        服务方案还在打磨，但人一直在线。咨询意向、商务合作，
+        <strong style="color:var(--paper)">抖音私信</strong>是最快的通道——我每天都会看。
+      </p>
+      <div class="hero-ctas rv" style="--d:.2s;margin-top:34px;justify-content:center">
+        <a class="btn btn-primary" href={SITE.douyin} target="_blank" rel="noopener" data-mag>
+          抖音私信 @不睡觉变笨蛋 ↗
+        </a>
+        <a class="btn btn-ghost-light" href="/about/">先了解这个人</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  @media (max-width: 640px) {
+    .svc-cols {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
