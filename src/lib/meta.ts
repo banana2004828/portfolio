@@ -41,7 +41,7 @@ export const SITE = {
   latin: 'SLEEPLESS EGG',
   tagline: '把方法论，缝成工具。',
   description:
-    '不睡觉变笨蛋的个人网站：AI 实战服务（咨询、陪跑）、AI 会员小店、开源工具与方法论。一个 AI 重度实践者，把真实业务里跑通的方法，变成服务、工具和方法。',
+    '不睡觉变笨蛋——个人 AI 技术服务与项目解决方案提供者。AI 实战咨询、陪跑服务、AI 会员小店，以及开源工具与方法论分享。',
   douyin: 'https://www.douyin.com/user/MS4wLjABAAAA8OZfJY3sBzdYY5wIRLrnhvYoA5WofWH6flHqBoywcbQ',
   github: 'https://github.com/banana2004828',
   shop: 'https://manboweb3.com/r/5K822X',
