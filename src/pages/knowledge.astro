@@ -1,0 +1,156 @@
+---
+import Base from '../layouts/Base.astro';
+import { PAID_KNOWLEDGE, KNOWLEDGE_BUNDLES } from '../lib/commerce';
+import { getCollection } from 'astro:content';
+
+const freeKnowledge = (await getCollection('works'))
+  .filter((w) => w.data.category === 'methodology')
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="知识产品库" description="免费 AI 教程与方法论，以及独立定价的付费知识产品：实战笔记、资料合集、深度教程。">
+  <header class="dark" style="padding:160px 0 80px;text-align:center">
+    <div class="wrap wrap-narrow">
+      <div class="eyebrow rv in">KNOWLEDGE · 知识产品库</div>
+      <h1 class="h-display rv in" style="font-size:clamp(2.2rem,5.4vw,4rem);margin-top:14px">
+        免费的随便看，<br />付费的<span class="grad-text">单独买</span>。
+      </h1>
+      <p class="sub rv in" style="margin:20px auto 0;max-width:540px">
+        免费知识负责让你入门和建立信任；付费资料独立定价、独立交付，
+        不捆绑会员、不强制搭配。
+      </p>
+    </div>
+  </header>
+
+  <!-- ============ 免费知识区 ============ -->
+  <section class="section light" id="free">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">FREE · 免费知识</div>
+          <h2 class="h-section" style="margin-top:10px">免费教程与方法论</h2>
+          <p class="sub" style="margin-top:12px">入门知识、操作指南、经验分享，全部开放，建立信任用的。</p>
+        </div>
+        <span class="count-badge">{freeKnowledge.length} 篇在线</span>
+      </div>
+      <div>
+        {freeKnowledge.map((w, i) => (
+          <a class="method-row rv" style={`--d:${i * 0.06}s`} href={`/works/${w.id}/`}>
+            <div class="method-idx">{String(i + 1).padStart(2, '0')}</div>
+            <div>
+              <div class="method-title">{w.data.title}</div>
+              <div class="method-desc">{w.data.tagline}</div>
+            </div>
+            <div class="card-foot">
+              <span class="chip">{w.data.status === 'brewing' ? '整理中' : '免费'}</span>
+              <span class="link-more">阅读 <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="rv" style="margin-top:26px;display:flex;gap:10px;flex-wrap:wrap">
+        <span class="chip">持续增加：AI 工具入门知识</span>
+        <span class="chip">实用经验分享</span>
+        <span class="chip">基础技术知识</span>
+        <span class="chip">免费资源合集</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 付费知识区 ============ -->
+  <section class="section white" id="paid">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">PAID · 付费资料</div>
+          <h2 class="h-section" style="margin-top:10px">付费知识产品</h2>
+          <p class="sub" style="margin-top:12px">
+            独立定价、独立销售：买了就是你的，不要求开通会员，会员也不自动送。
+          </p>
+        </div>
+        <span class="count-badge">{PAID_KNOWLEDGE.filter((p) => p.status === 'live').length} 件已上架</span>
+      </div>
+
+      <div class="grid-cards">
+        {PAID_KNOWLEDGE.map((p, i) => (
+          <article class="card card-glare rv" style={`--d:${i * 0.07}s`} data-tilt>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+              <span class="chip chip-accent">付费知识</span>
+              <span class="chip chip-dot">{p.status === 'live' ? '已上架' : '整理中 · 未开售'}</span>
+            </div>
+            <h3 class="card-title">{p.name}</h3>
+            <p class="card-tagline">{p.intro}</p>
+            <div style="font-size:13px;color:var(--ink-2);line-height:1.9;margin-bottom:14px">
+              <div><strong style="color:var(--ink)">包含：</strong>{p.includes.join('、')}</div>
+              <div><strong style="color:var(--ink)">适合：</strong>{p.audience}</div>
+              <div><strong style="color:var(--ink)">交付：</strong>{p.delivery}</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+              <div style="font-size:22px;font-weight:800">
+                ¥{p.price}
+              </div>
+              {p.status === 'live' ? (
+                <a class="btn btn-primary" style="padding:10px 22px;font-size:14px" href="/services/#contact">购买咨询 →</a>
+              ) : (
+                <button class="btn btn-ghost-dark btn-disabled" style="padding:10px 22px;font-size:14px" disabled>上架前不开放购买</button>
+              )}
+            </div>
+          </article>
+        ))}
+        {PAID_KNOWLEDGE.length === 0 && (
+          <div class="card rv"><p class="card-tagline" style="margin:0">首批付费资料整理中。</p></div>
+        )}
+      </div>
+
+      <!-- 教程课程 / 专题合集（规划中，明确标注） -->
+      <div style="margin-top:56px;display:grid;gap:20px" class="plan-grid">
+        <div class="card rv" style="--d:.1s">
+          <div class="chip chip-dot" style="margin-bottom:14px">教程课程 · 规划中</div>
+          <h3 class="card-title">专项知识课程</h3>
+          <p class="card-tagline" style="margin-bottom:0">
+            AI 工具深度使用教程、自动化工作流教程，按课程形态制作。规划中，不上架不显示价格。
+          </p>
+        </div>
+        <div class="card rv" style="--d:.16s">
+          <div class="chip chip-dot" style="margin-bottom:14px">专题合集 · 规划中</div>
+          <h3 class="card-title">知识产品合集（未来功能）</h3>
+          <div style="font-size:13.5px;color:var(--ink-2);line-height:2">
+            {KNOWLEDGE_BUNDLES.map((b) => <div>· <strong style="color:var(--ink)">{b.name}</strong>：{b.idea}</div>)}
+          </div>
+          <p class="card-tagline" style="margin:10px 0 0">合集将独立定价，根据实际内容数量与价值确定，不提前开售。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 购买与咨询入口 ============ -->
+  <section class="section dark" style="padding:clamp(70px,9vw,110px) 0">
+    <div class="wrap" style="text-align:center">
+      <div class="eyebrow rv">BUY</div>
+      <h2 class="h-section rv" style="--d:.08s;margin:14px 0 16px">怎么买？</h2>
+      <p class="sub rv" style="--d:.14s;max-width:520px;margin:0 auto">
+        支付通道接入前，所有付费产品通过<strong style="color:var(--paper)">联系通道</strong>直接咨询下单：
+        微信 / QQ / 抖音私信都行，说明要买什么，我发你交付内容。
+      </p>
+      <div class="hero-ctas rv" style="--d:.2s;margin-top:30px;justify-content:center">
+        <a class="btn btn-primary" href="/services/#contact">去联系通道</a>
+        <a class="btn btn-ghost-light" href="/subscribe/">顺便看看会员</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  @media (max-width: 760px) {
+    .plan-grid {
+      grid-template-columns: 1fr !important;
+      display: grid;
+    }
+  }
+  @media (min-width: 761px) {
+    .plan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import WorkCard from '../components/WorkCard.astro';
-import { SERVICES, SITE } from '../lib/meta';
+import { SITE } from '../lib/meta';
+import { MEMBERSHIP } from '../lib/commerce';
 import { getCollection } from 'astro:content';
 
 const all = (await getCollection('works')).sort(
@@ -78,39 +79,43 @@ const stats = [
     </div>
   </section>
 
-  <!-- ================= 服务区（核心业务，前置） ================= -->
-  <section class="section light" id="services">
+  <!-- ================= 商业四入口 ================= -->
+  <section class="section light" id="entries">
     <div class="wrap">
       <div class="section-head rv">
         <div>
-          <div class="eyebrow">SERVICES · 核心业务</div>
-          <h2 class="h-section" style="margin-top:10px">我能为你做什么</h2>
+          <div class="eyebrow">WHAT I OFFER</div>
+          <h2 class="h-section" style="margin-top:10px">让 AI 工具真正为你所用</h2>
           <p class="sub" style="margin-top:12px">
-            咨询和陪跑的付费方案在整理中，方向可以先看；AI 小店现货直购，随到随买。
+            工具、知识、技术服务与项目陪跑，帮助你把想法变成实际成果。
           </p>
         </div>
-        <a class="btn btn-ghost-dark" style="padding:10px 20px;font-size:13.5px" href="/services/">服务详情 →</a>
       </div>
       <div class="grid-cards">
-        {SERVICES.map((s, i) => (
-          <article class="card card-glare rv" style={`--d:${i * 0.07}s`} data-tilt>
+        {[
+          { en: 'KNOWLEDGE', cn: '知识产品', desc: '学习教程，获取实用资料。免费区随便看，付费资料单独买。', href: '/knowledge/', tag: '免费入口', accent: true, price: '¥0 起' },
+          { en: 'TOOLS', cn: '工具资源', desc: '发现和使用实用工具：应用、命令行、Agent 技能，付费工具单独买。', href: '/works/', tag: '免费为主', accent: true, price: '¥0 起' },
+          { en: 'MEMBERSHIP', cn: 'PLUS 会员', desc: '获得持续技术咨询和交流服务，专属会员社群。', href: '/subscribe/', tag: '正式推出', accent: false, price: '¥19.9/月' },
+          { en: '1-ON-1', cn: '项目服务', desc: '一对一教学、项目陪跑、远程协助与定制实施。', href: '/services/', tag: '按项目收费', accent: false, price: '¥88 起' },
+        ].map((e, i) => (
+          <a class="card card-glare rv" style={`--d:${i * 0.07}s`} data-tilt href={e.href}>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
-              <span class="chip chip-accent">{s.cn}</span>
-              <span class:list={['chip', { 'chip-dot': s.brewing }]}>{s.badge}</span>
+              <span class="chip chip-accent">{e.tag}</span>
+              <span class="chip">{e.price}</span>
             </div>
-            <h3 class="card-title">{s.headline}</h3>
-            <p class="card-tagline">{s.desc}</p>
+            <div class="eyebrow" style="margin-bottom:6px">{e.en}</div>
+            <h3 class="card-title">{e.cn}</h3>
+            <p class="card-tagline">{e.desc}</p>
             <div class="card-foot">
-              {s.brewing ? (
-                <span class="chip" style="font-size:12px">价格方案整理中 · 可抖音先聊</span>
-              ) : (
-                <a class="link-more" href={SITE.shop} target="_blank" rel="noopener">
-                  进店现货直购 <span aria-hidden="true">↗</span>
-                </a>
-              )}
+              <span class="link-more">进入 <span aria-hidden="true">→</span></span>
             </div>
-          </article>
+          </a>
         ))}
+      </div>
+      <div class="rv" style="--d:.2s;margin-top:30px;display:flex;justify-content:center">
+        <a class="btn btn-primary" href="https://manboweb3.com/r/5K822X" target="_blank" rel="noopener" data-mag>
+          急用会员？AI 小店现货直购 ↗
+        </a>
       </div>
     </div>
   </section>
@@ -211,41 +216,38 @@ const stats = [
     </div>
   </section>
 
-  <!-- ================= 订阅（深色） ================= -->
+  <!-- ================= PLUS 会员（深色） ================= -->
   <section class="dark" style="padding:clamp(90px,12vw,150px) 0 130px">
     <div class="wrap">
       <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,6vw,72px);align-items:center" class="sub-grid">
         <div>
-          <div class="eyebrow rv">SUBSCRIBE</div>
+          <div class="eyebrow rv">MEMBERSHIP</div>
           <h2 class="h-section rv" style="--d:.08s;margin:14px 0 18px;font-size:clamp(2rem,4.6vw,3.2rem)">
-            免费看个热闹，<br />订阅<span class="grad-text">拿走全部</span>。
+            PLUS 会员：<br />把 AI 问题，交给一个<span class="grad-text">随时能问的人</span>。
           </h2>
-          <p class="sub rv" style="--d:.16s;max-width:440px">
-            全部提示词、手册、模板的完整版都在订阅库里，持续更新。
-            工具介绍和方法论导览永远免费——先看清楚，再决定要不要。
+          <ul class="sub rv" style="--d:.16s;max-width:460px;list-style:none;padding:0;font-size:15px">
+            {MEMBERSHIP.plus.rights.slice(0, 5).map((r) => <li style="padding:4px 0">✓ {r}</li>)}
+            <li style="padding:4px 0">✓ …和专属会员社群</li>
+          </ul>
+          <p class="sub rv" style="--d:.2s;font-size:13.5px;max-width:460px">
+            不按条数收费、不设机械限制；不含代操作和定制开发——那些在
+            <a href="/services/" style="color:var(--accent);font-weight:600">一对一服务</a>里。
           </p>
-          <div class="hero-ctas rv" style="--d:.24s;margin-top:32px;justify-content:flex-start">
-            <a class="btn btn-primary btn-disabled" href="/subscribe/" aria-disabled="true">加入订阅 · 即将上线</a>
-            <a class="btn btn-ghost-light" href="/works/methodology/suture-workflow/">先免费看一篇</a>
+          <div class="hero-ctas rv" style="--d:.24s;margin-top:30px;justify-content:flex-start">
+            <a class="btn btn-primary" href="/subscribe/" data-mag>了解 PLUS 会员</a>
+            <a class="btn btn-ghost-light" href="/knowledge/">先逛免费知识区</a>
           </div>
         </div>
         <div class="rv" style="--d:.2s">
-          <div class="lock-demo">
-            <div class="lock-demo-bar"><i></i><i></i><i></i></div>
-            <div class="lock-demo-body">
-              <div><span class="cm"># 角色设定</span></div>
-              <div>你是一名资深的开源项目调研专家，</div>
-              <div>擅长用公开信号快速定优劣……</div>
-              <div class="lock-blur">
-                <div>第五步 · 底座选择的判定表如下：</div>
-                <div>维度A 权重0.3 —— <span class="kw">架构契合度</span></div>
-                <div>维度B 权重0.25 —— 许可证兼容</div>
-                <div>维度C 权重0.2 —— 迁移成本……</div>
-              </div>
+          <div class="lock-demo" style="text-align:center;padding:40px 30px">
+            <div style="font-size:13px;letter-spacing:.2em;color:rgba(245,245,247,.5)">PLUS 个人技术会员</div>
+            <div style="font-size:64px;font-weight:800;margin:14px 0 4px">
+              ¥<span class="grad-text">{MEMBERSHIP.plus.price}</span>
             </div>
-            <div class="lock-overlay">
-              <div class="lock-icon">🔒</div>
-              <div style="font-size:13px;font-weight:600;color:rgba(245,245,247,.85)">订阅解锁完整版</div>
+            <div style="font-size:13px;color:rgba(245,245,247,.5);margin-bottom:22px">{MEMBERSHIP.plus.unit} · 随时咨询 · 专属社群</div>
+            <a class="btn btn-primary" style="width:100%;justify-content:center" href="/subscribe/">开通 / 了解权益</a>
+            <div style="font-size:12px;color:rgba(245,245,247,.4);margin-top:16px">
+              知识产品、工具单独购买 · 不与会员捆绑
             </div>
           </div>
         </div>

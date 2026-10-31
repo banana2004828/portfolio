@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, tagline, category, status, tags, github, cover } = entry.data;
+const { title, tagline, category, status, tags, github, cover, price, delivery } = entry.data;
 const cat = CATEGORIES[category];
 
 const related = (await getCollection('works'))
@@ -33,6 +33,23 @@ const related = (await getCollection('works'))
       </div>
       <h1 class="h-section rv in">{title}</h1>
       <p class="sub" style="margin-top:16px">{tagline}</p>
+      {(price || delivery) && (
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:20px;padding:16px 20px;border:1px solid var(--hairline-light);border-radius:14px;background:#fff">
+          {price && (
+            <div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--ink-2)">价格</div>
+              <div style="font-size:22px;font-weight:800">¥{price}</div>
+            </div>
+          )}
+          {delivery && (
+            <div style="font-size:13.5px;color:var(--ink-2)">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.14em">交付</div>
+              {delivery}
+            </div>
+          )}
+          <a class="btn btn-primary" style="padding:10px 22px;font-size:14px;margin-left:auto" href="/services/#contact">购买咨询 →</a>
+        </div>
+      )}
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px">
         {github && (
           <a class="btn btn-ghost-dark" style="padding:11px 22px;font-size:14px" href={github} target="_blank" rel="noopener">

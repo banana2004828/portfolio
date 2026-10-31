@@ -14,6 +14,8 @@ const works = defineCollection({
     cover: z.string().optional(),
     featured: z.boolean().default(false),
     order: z.number().default(99),
+    price: z.string().optional(),
+    delivery: z.string().optional(),
   }),
 });
 

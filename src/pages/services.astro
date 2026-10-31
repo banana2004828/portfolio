@@ -1,75 +1,134 @@
 ---
 import Base from '../layouts/Base.astro';
 import ContactChannels from '../components/ContactChannels.astro';
-import { SERVICES, SITE } from '../lib/meta';
+import { SERVICE_TIERS, SERVICE_MODES, AFTERCARE } from '../lib/commerce';
+import { SERVICES } from '../lib/meta';
+const store = SERVICES.find((s) => !s.brewing);
 ---
 
-<Base title="我的服务" description="AI 实战咨询、陪跑服务、AI 会员小店——不睡觉变笨蛋的核心业务。">
+<Base title="一对一服务" description="AI 技术指导、项目陪跑、远程协助、定制服务——按项目按工作量收费，88 元起，一个月基础售后。">
   <header class="dark" style="padding:160px 0 90px;text-align:center">
     <div class="wrap wrap-narrow">
-      <div class="eyebrow rv in">SERVICES · 核心业务</div>
+      <div class="eyebrow rv in">SERVICE · 一对一项目服务</div>
       <h1 class="h-display rv in" style="font-size:clamp(2.2rem,5.4vw,4rem);margin-top:14px">
         真实业务里跑通的，<br />才能<span class="grad-text">卖给你</span>。
       </h1>
       <p class="sub rv in" style="margin:20px auto 0;max-width:560px">
-        我不开空头支票：每一项服务背后，都是我自己先跑过一遍的东西。
-        咨询和陪跑的付费方案正在整理，先看看方向对不对你的胃口。
+        一对一教学、项目陪跑、远程安装配置、环境部署、自动化工作流搭建。
+        按项目按工作量收费，复杂项目先聊需求再报价。
       </p>
     </div>
   </header>
 
-  <section class="section light">
-    <div class="wrap" style="display:grid;gap:28px;max-width:860px">
-      {SERVICES.map((s, i) => (
-        <article class="card card-glare rv" style={`--d:${i * 0.08}s`} data-tilt>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
-            <span class="method-idx" style="font-size:22px">{s.idx}</span>
-            <span class="chip chip-accent">{s.en}</span>
-            <span class:list={['chip', { 'chip-dot': s.brewing }]}>{s.badge}</span>
+  <!-- ============ 四种模式，严格区分 ============ -->
+  <section class="section light" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">MODES · 先分清楚</div>
+          <h2 class="h-section" style="margin-top:10px">四种模式，不混为一谈</h2>
+        </div>
+      </div>
+      <div class="grid-cards">
+        {SERVICE_MODES.map((m, i) => (
+          <div class="card card-glare rv" style={`--d:${i * 0.06}s`} data-tilt>
+            <div class="chip chip-accent" style="margin-bottom:14px">{m.name}</div>
+            <h3 class="card-title" style="font-size:16.5px">{m.what}</h3>
+            <p class="card-tagline" style="margin-bottom:0">{m.you}</p>
           </div>
-          <h2 class="h-3">{s.cn}</h2>
-          <p style="font-weight:600;margin:8px 0 10px;font-size:15.5px">{s.headline}</p>
-          <p class="card-tagline">{s.desc}</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0 22px" class="svc-cols">
-            <div>
-              <div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--ink-2);margin-bottom:8px">适合谁</div>
-              <ul class="prose" style="list-style:none;padding:0;font-size:13.5px;color:var(--ink-2)">
-                {s.fit.map((f) => <li>· {f}</li>)}
-              </ul>
-            </div>
-            <div>
-              <div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--ink-2);margin-bottom:8px">交付方式</div>
-              <div style="font-size:13.5px;color:var(--ink-2)">{s.delivery}</div>
-              <div style="font-size:13.5px;color:var(--ink-2);margin-top:6px">价格：<strong>方案整理中</strong></div>
-            </div>
-          </div>
-          <div style="display:flex;gap:12px;flex-wrap:wrap">
-            {s.brewing ? (
-              <>
-                <button class="btn btn-ghost-dark btn-disabled" style="padding:11px 22px;font-size:14px" disabled>预约通道 · 即将开放</button>
-                <a class="btn btn-ghost-dark" style="padding:11px 22px;font-size:14px" href={SITE.douyin} target="_blank" rel="noopener">
-                  抖音先聊聊 ↗
-                </a>
-              </>
-            ) : (
-              <a class="btn btn-primary" style="padding:11px 26px;font-size:14px" href={SITE.shop} target="_blank" rel="noopener" data-mag>
-                进店现货直购 ↗
-              </a>
-            )}
-          </div>
-        </article>
-      ))}
+        ))}
+      </div>
     </div>
   </section>
 
-  <section class="section white" id="contact">
+  <!-- ============ 五档定价 ============ -->
+  <section class="section light" id="pricing">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">PRICING · 价格表</div>
+          <h2 class="h-section" style="margin-top:10px">按项目按工作量收费</h2>
+          <p class="sub" style="margin-top:12px">
+            明码标价起步，复杂项目先了解需求再单独报价——不承诺所有项目都按固定价完成。
+          </p>
+        </div>
+        <span class="count-badge">{SERVICE_TIERS.length} 档</span>
+      </div>
+      <div style="display:grid;gap:16px;max-width:900px">
+        {SERVICE_TIERS.map((t, i) => (
+          <div class="card card-glare rv" style={`--d:${i * 0.05}s;padding:22px 26px`} data-tilt>
+            <div style="display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center" class="tier-row">
+              <div>
+                <div style="font-size:30px;font-weight:800;letter-spacing:-.02em;color:var(--ink)">
+                  ¥{t.price}
+                </div>
+                <div style="font-size:12px;color:var(--ink-2);margin-top:2px">{t.unit}</div>
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:16.5px;margin-bottom:4px">{t.name}</div>
+                <div style="font-size:14px;color:var(--ink-2);line-height:1.75">{t.detail}</div>
+                <div style="font-size:12.5px;color:var(--ink-2);margin-top:6px">交付：{t.delivery}</div>
+              </div>
+              <a class="btn btn-primary" style="padding:10px 20px;font-size:13.5px;white-space:nowrap"
+                 href="/services/#contact">咨询下单</a>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="sub rv" style="--d:.2s;margin-top:22px;font-size:13.5px">
+        服务形式涵盖：一对一教学 · 项目陪跑 · 技术指导 · 远程安装配置 · 环境部署 · 软件调试 · 自动化工作流搭建 · 个性化项目实施
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ AI 小店（现货） ============ -->
+  {store && (
+    <section class="section white" style="padding-top:0">
+      <div class="wrap" style="max-width:900px">
+        <div class="card card-glare rv" data-tilt>
+          <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:space-between">
+            <div style="min-width:240px;flex:1">
+              <div class="chip chip-accent" style="margin-bottom:12px">顺带一提 · 现货不用等</div>
+              <h3 class="card-title">{store.headline} ↗</h3>
+              <p class="card-tagline" style="margin:6px 0 0">{store.desc}</p>
+            </div>
+            <a class="btn btn-primary" style="flex-shrink:0" href="https://manboweb3.com/r/5K822X" target="_blank" rel="noopener" data-mag>
+              进店直购
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ============ 售后体系 ============ -->
+  <section class="section light" style="padding-top:0">
+    <div class="wrap" style="max-width:900px">
+      <div class="card rv" style="padding:30px">
+        <div class="chip chip-accent" style="margin-bottom:16px">售后承诺 · {AFTERCARE.period}基础售后</div>
+        <h3 class="card-title" style="margin-bottom:10px">买了产品或远程服务，之后出问题怎么办？</h3>
+        <div style="font-size:14.5px;line-height:2;margin-bottom:14px">
+          <strong>包含：</strong>{AFTERCARE.includes.join('；')}。
+        </div>
+        <ul class="prose" style="font-size:13.5px;color:var(--ink-2);margin:0">
+          {AFTERCARE.rules.map((r) => <li>{r}</li>)}
+        </ul>
+        <p class="card-tagline" style="margin:14px 0 0">
+          注意区分：<strong>会员咨询</strong>是日常问答交流，<strong>产品售后</strong>是原服务出问题的免费修复——两回事，各自的边界都在页面上写清楚。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 联系通道 ============ -->
+  <section class="section white" id="contact" style="padding-top:0">
     <div class="wrap">
       <div class="section-head rv">
         <div>
           <div class="eyebrow">CONTACT</div>
-          <h2 class="h-section" style="margin-top:10px">六个通道，随时找到我</h2>
+          <h2 class="h-section" style="margin-top:10px">下单与咨询</h2>
           <p class="sub" style="margin-top:12px">
-            服务方案还在打磨，但人一直在线：国内走抖音/微信/QQ，海外走 Telegram，要现货直接进小店。
+            支付通道接入前：选好档位 → 从下面任一通道联系我 → 说清需求 → 确认方案和价格 → 开工。
           </p>
         </div>
       </div>
@@ -79,9 +138,13 @@ import { SERVICES, SITE } from '../lib/meta';
 </Base>
 
 <style>
-  @media (max-width: 640px) {
-    .svc-cols {
+  @media (max-width: 720px) {
+    .tier-row {
       grid-template-columns: 1fr !important;
+      gap: 12px !important;
+    }
+    .tier-row > a {
+      justify-self: start;
     }
   }
 </style>

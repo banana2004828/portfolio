@@ -2,78 +2,133 @@
 import Base from '../../layouts/Base.astro';
 import WorkCard from '../../components/WorkCard.astro';
 import { CATEGORIES } from '../../lib/meta';
+import { PAID_TOOLS } from '../../lib/commerce';
 import { getCollection } from 'astro:content';
 
 const all = (await getCollection('works')).sort(
   (a, b) => a.data.order - b.data.order
 );
-const cats = ['apps', 'cli', 'skills', 'methodology', 'wip'];
+// 工具产品库：应用 / 命令行 / Agent 技能（方法论已独立为知识产品库）
+const toolCats = ['apps', 'cli', 'skills'];
+const wip = all.filter((w) => w.data.category === 'wip');
 ---
 
-<Base title="工具库" description="不睡觉变笨蛋的工具库：完整应用、命令行与自动化工具、Agent 技能、提示词与方法论。">
+<Base title="工具产品库" description="免费工具随便用，付费工具单独买：完整应用、命令行与自动化、Agent 技能。与会员身份无关，独立定价独立交付。">
   <header class="light" style="padding:150px 0 30px">
     <div class="wrap">
-      <div class="eyebrow rv">TOOL LIBRARY</div>
-      <h1 class="h-section rv" style="--d:.08s;margin-top:12px">工具库</h1>
-      <p class="sub rv" style="--d:.16s;margin-top:12px;max-width:560px">
-        五个板块，按类型整理清楚。工具是用来跑的，方法论是用来抄的。
+      <div class="eyebrow rv">TOOL LIBRARY · 工具产品库</div>
+      <h1 class="h-section rv" style="--d:.08s;margin-top:12px">工具产品库</h1>
+      <p class="sub rv" style="--d:.16s;margin-top:12px;max-width:600px">
+        免费工具随便用，付费工具单独买——独立定价、独立交付，和会员身份无关。
+        买了就是你的，不随会员到期失效。
       </p>
     </div>
   </header>
 
   <nav class="cat-nav" aria-label="分类导航">
     <div class="wrap" style="display:flex;gap:8px;width:100%;max-width:none">
-      {cats.map((c) => <a href={`#${c}`}>{CATEGORIES[c].cn}</a>)}
+      <a href="#free">免费工具</a>
+      <a href="#paid">付费工具</a>
+      <a href="#wip">还在锅里</a>
     </div>
   </nav>
 
-  {
-    cats.map((cat, idx) => {
-      const works = all.filter((w) => w.data.category === cat);
-      const meta = CATEGORIES[cat];
-      const tone = idx % 2 === 0 ? 'light' : 'white';
-      return (
-        <section class={`section ${tone}`} id={cat} style="scroll-margin-top:120px">
-          <div class="wrap">
-            <div class="section-head rv">
-              <div>
-                <div class="eyebrow">{meta.en}</div>
-                <h2 class="h-section" style="margin-top:10px">{meta.cn}</h2>
-                <p class="sub" style="margin-top:12px">{meta.desc}</p>
-              </div>
-              <span class="count-badge">{cat === 'methodology' ? `${works.length} 篇` : `${works.length} 件`}</span>
+  <!-- ============ 免费工具 ============ -->
+  <section class="section light" id="free" style="scroll-margin-top:120px">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">FREE TOOLS · 免费工具</div>
+          <h2 class="h-section" style="margin-top:10px">免费工具，随便用</h2>
+          <p class="sub" style="margin-top:12px">名称、介绍、功能说明、使用教程都在详情页，官方入口直接给。</p>
+        </div>
+        <span class="count-badge">{all.filter((w) => toolCats.includes(w.data.category)).length} 件</span>
+      </div>
+      {toolCats.map((cat, idx) => {
+        const works = all.filter((w) => w.data.category === cat);
+        const meta = CATEGORIES[cat];
+        return (
+          <div style={idx > 0 ? 'margin-top:64px' : ''}>
+            <div class="rv" style="margin-bottom:22px">
+              <span class="chip chip-accent">{meta.cn}</span>
+              <span style="font-size:13.5px;color:var(--ink-2);margin-left:10px">{meta.desc}</span>
             </div>
-            {cat === 'methodology' ? (
-              <div>
-                {works.map((w, i) => (
-                  <a class="method-row rv" style={`--d:${i * 0.06}s`} href={`/works/${w.id}/`}>
-                    <div class="method-idx">{String(i + 1).padStart(2, '0')}</div>
-                    <div>
-                      <div class="method-title">{w.data.title}</div>
-                      <div class="method-desc">{w.data.tagline}</div>
-                    </div>
-                    <div class="card-foot">
-                      <span class="chip">{w.data.status === 'brewing' ? '整理中' : '免费'}</span>
-                      <span class="link-more">阅读 <span aria-hidden="true">→</span></span>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <div class="grid-cards">
-                {works.map((w, i) => (
-                  <WorkCard
-                    work={w}
-                    solo={works.length === 1 && !!w.data.cover}
-                    wide={works.length > 1 && w.data.featured}
-                    delay={i * 0.07}
-                  />
-                ))}
-              </div>
-            )}
+            <div class="grid-cards">
+              {works.map((w, i) => (
+                <WorkCard
+                  work={w}
+                  solo={works.length === 1 && !!w.data.cover}
+                  wide={works.length > 1 && w.data.featured}
+                  delay={i * 0.07}
+                />
+              ))}
+            </div>
           </div>
-        </section>
-      );
-    })
-  }
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- ============ 付费工具 ============ -->
+  <section class="section white" id="paid" style="scroll-margin-top:120px">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">PAID TOOLS · 付费工具</div>
+          <h2 class="h-section" style="margin-top:10px">付费工具，单独买</h2>
+          <p class="sub" style="margin-top:12px">
+            AI 工具、软件服务、Codex 相关服务、软件配置服务——独立定价，买了就是你的。
+          </p>
+        </div>
+        <span class="count-badge">{PAID_TOOLS.length} 件已上架</span>
+      </div>
+      {PAID_TOOLS.length === 0 ? (
+        <div class="card rv" style="max-width:640px;text-align:center;padding:40px 30px">
+          <div class="chip chip-dot" style="margin-bottom:14px">首批付费工具整理中 · 未开售</div>
+          <h3 class="card-title">Codex 相关服务 / 软件配置服务，在路上</h3>
+          <p class="card-tagline" style="margin-bottom:18px">
+            按规矩来：没上架的东西不标价、不开卖。想优先安排你的需求，
+            可以先走联系通道预订咨询。
+          </p>
+          <a class="btn btn-ghost-dark" href="/services/#contact">先聊需求 →</a>
+        </div>
+      ) : (
+        <div class="grid-cards">
+          {PAID_TOOLS.map((p, i) => (
+            <article class="card card-glare rv" style={`--d:${i * 0.07}s`} data-tilt>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+                <span class="chip chip-accent">付费工具</span>
+                <span class="chip">{p.status === 'live' ? '已上架' : '整理中'}</span>
+              </div>
+              <h3 class="card-title">{p.name}</h3>
+              <p class="card-tagline">{p.intro}</p>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="font-size:22px;font-weight:800">¥{p.price}</div>
+                <a class="btn btn-primary" style="padding:10px 22px;font-size:14px" href="/services/#contact">购买咨询 →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ============ 还在锅里 ============ -->
+  <section class="section light" id="wip" style="scroll-margin-top:120px">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">IN PROGRESS · 还在锅里</div>
+          <h2 class="h-section" style="margin-top:10px">正在长出来的</h2>
+          <p class="sub" style="margin-top:12px">先立牌子，不做空气 promise——成型一个上架一个。</p>
+        </div>
+        <span class="count-badge">{wip.length} 件</span>
+      </div>
+      <div class="grid-cards">
+        {wip.map((w, i) => (
+          <WorkCard work={w} delay={i * 0.07} />
+        ))}
+      </div>
+    </div>
+  </section>
 </Base>

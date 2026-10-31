@@ -1,99 +1,130 @@
 ---
 import Base from '../layouts/Base.astro';
+import ContactChannels from '../components/ContactChannels.astro';
+import { MEMBERSHIP } from '../lib/commerce';
 ---
 
-<Base title="订阅" description="免费看个热闹，订阅拿走全部：提示词、手册、模板完整版，持续更新。">
+<Base title="会员中心" description="PLUS 个人技术会员 19.9 元/月：持续 AI 技术咨询、软件配置交流、专属会员社群。知识产品和工具独立购买，不捆绑。">
   <header class="dark" style="padding:160px 0 80px;text-align:center">
     <div class="wrap wrap-narrow">
-      <div class="eyebrow rv in">SUBSCRIBE</div>
+      <div class="eyebrow rv in">MEMBERSHIP · 会员中心</div>
       <h1 class="h-display rv in" style="font-size:clamp(2.2rem,5.4vw,4rem);margin-top:14px">
-        免费看个热闹，<br />订阅<span class="grad-text">拿走全部</span>。
+        会员买的不是资料，<br />是一个<span class="grad-text">随时能问的人</span>。
       </h1>
-      <p class="sub rv in" style="margin:20px auto 0;max-width:520px">
-        工具介绍和方法论导览永远免费。订阅解锁的是直接可用的完整版——拿来就能跑的那种。
+      <p class="sub rv in" style="margin:20px auto 0;max-width:560px">
+        知识产品单独购买，工具单独购买，会员购买的是持续咨询与社群交流。
+        三者独立，互不捆绑。
       </p>
     </div>
   </header>
 
+  <!-- ============ PLUS 会员 ============ -->
   <section class="section light">
     <div class="wrap">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:860px;margin-inline:auto">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:960px;margin-inline:auto">
+        <!-- 免费（对照） -->
         <div class="card rv" style="--d:.05s">
-          <div class="chip" style="margin-bottom:18px">免费 · 蛋友</div>
+          <div class="chip" style="margin-bottom:18px">不加入 · 也够用</div>
           <div style="font-size:2.6rem;font-weight:800;letter-spacing:-.02em">¥0</div>
-          <p class="card-tagline" style="margin-top:8px">白嫖党友好，永远开放。</p>
+          <p class="card-tagline" style="margin-top:8px">免费区永远开放。</p>
           <hr style="border:none;border-top:1px solid var(--hairline-light);margin:20px 0" />
           <ul class="prose" style="list-style:none;padding:0;font-size:14.5px">
-            <li>✓ 全部工具介绍与方法论导览</li>
-            <li>✓ GitHub 上所有开源项目</li>
-            <li>✓ 免费版方法论文章（如缝合怪六步工作流）</li>
-            <li>✓ 抖音日常实战更新</li>
+            <li>✓ 免费知识库全部内容</li>
+            <li>✓ GitHub 全部开源工具</li>
+            <li>✓ 工具库免费区</li>
+            <li>✓ 抖音实战更新</li>
           </ul>
+          <a class="btn btn-ghost-dark" style="margin-top:24px;width:100%;justify-content:center" href="/knowledge/">去白嫖免费区</a>
         </div>
 
+        <!-- PLUS -->
         <div class="card rv" style="--d:.12s;border:2px solid var(--accent);position:relative">
-          <span class="chip chip-accent" style="position:absolute;top:-13px;right:20px;background:#fff">即将上线</span>
-          <div class="chip chip-accent" style="margin-bottom:18px">订阅 · 会员</div>
+          <span class="chip chip-accent" style="position:absolute;top:-13px;right:20px;background:#fff">正式推出</span>
+          <div class="chip chip-accent" style="margin-bottom:18px">PLUS 个人技术会员</div>
           <div style="font-size:2.6rem;font-weight:800;letter-spacing:-.02em">
-            ¥<span class="grad-text">待定</span>
-            <span style="font-size:14px;font-weight:600;color:var(--ink-2)">/月</span>
+            ¥{MEMBERSHIP.plus.price}
+            <span style="font-size:14px;font-weight:600;color:var(--ink-2)">{MEMBERSHIP.plus.unit}</span>
           </div>
-          <p class="card-tagline" style="margin-top:8px">给真正要用起来的人。</p>
-          <hr style="border:none;border-top:1px solid var(--hairline-light);margin:20px 0" />
-          <ul class="prose" style="list-style:none;padding:0;font-size:14.5px">
-            <li>✓ <strong>Prompt 资产库完整版</strong>（持续更新）</li>
-            <li>✓ 缝合怪全套模板与判定表</li>
-            <li>✓ vibecoding 实战笔记完整版（整理完成即推送）</li>
-            <li>✓ 自动化工作流的提示词合集</li>
-            <li>✓ 新内容第一时间解锁</li>
+          <p style="font-weight:700;margin:10px 0 4px;font-size:15.5px">{MEMBERSHIP.plus.tagline}</p>
+          <p class="card-tagline" style="margin-top:4px">{MEMBERSHIP.plus.positioning}</p>
+          <hr style="border:none;border-top:1px solid var(--hairline-light);margin:18px 0" />
+          <div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--ink-2);margin-bottom:8px">会员权益</div>
+          <ul class="prose" style="list-style:none;padding:0;font-size:14px">
+            {MEMBERSHIP.plus.rights.map((r) => <li>✓ {r}</li>)}
           </ul>
-          <button class="btn btn-primary btn-disabled" style="margin-top:24px;width:100%;justify-content:center" disabled>
-            支付通道接好后开放
+          <div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--ink-2);margin:16px 0 8px">规则（丑话说在前面）</div>
+          <ul class="prose" style="list-style:none;padding:0;font-size:13px;color:var(--ink-2)">
+            {MEMBERSHIP.plus.rules.map((r) => <li>· {r}</li>)}
+          </ul>
+          <a class="btn btn-primary" style="margin-top:22px;width:100%;justify-content:center" href="/services/#contact" data-mag>
+            开通 PLUS · 19.9 元/月
+          </a>
+          <p style="font-size:12px;color:var(--ink-2);text-align:center;margin-top:10px">
+            支付通道接入前，点击后通过联系通道付款开通
+          </p>
+        </div>
+
+        <!-- PRO 预留 -->
+        <div class="card rv btn-disabled" style="--d:.18s;position:relative">
+          <span class="chip" style="position:absolute;top:-13px;right:20px;background:#fff">即将推出 · 现在不卖</span>
+          <div class="chip" style="margin-bottom:18px">PRO 专业会员</div>
+          <div style="font-size:2.6rem;font-weight:800;letter-spacing:-.02em">
+            ¥{MEMBERSHIP.pro.price}
+            <span style="font-size:14px;font-weight:600;color:var(--ink-2)">{MEMBERSHIP.pro.unit}</span>
+          </div>
+          <p style="font-weight:700;margin:10px 0 4px;font-size:15.5px">{MEMBERSHIP.pro.tagline}</p>
+          <p class="card-tagline" style="margin-top:4px">在 PLUS 权益基础上，规划增加：</p>
+          <ul class="prose" style="list-style:none;padding:0;font-size:14px;color:var(--ink-2)">
+            {MEMBERSHIP.pro.futureRights.map((r) => <li>· {r}</li>)}
+          </ul>
+          <button class="btn btn-ghost-dark btn-disabled" style="margin-top:22px;width:100%;justify-content:center" disabled>
+            未开放购买
           </button>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section light" style="padding-top:0">
-    <div class="wrap" style="max-width:860px">
-      <div class="card card-glare rv" style="--d:.1s" data-tilt>
-        <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:space-between">
-          <div style="min-width:240px;flex:1">
-            <div class="chip chip-accent" style="margin-bottom:12px">AI 小店 · 现货直购</div>
-            <h3 class="card-title">AI 会员代充，即买即用 ↗</h3>
-            <p class="card-tagline" style="margin:6px 0 0">
-              ChatGPT Plus / Go、Grok、Muse 等会员充值，源头供应、24h 自动发货，掉订阅按天数退款。
-              不想等订阅的，来这里现货拿下。
-            </p>
-          </div>
-          <a class="btn btn-primary" style="flex-shrink:0" href="https://manboweb3.com/r/5K822X" target="_blank" rel="noopener" data-mag>
-            进店逛逛
-          </a>
+      <!-- 三者区分说明 -->
+      <div class="card rv" style="--d:.1s;max-width:960px;margin:28px auto 0">
+        <div class="chip chip-accent" style="margin-bottom:14px">重要区分 · 不搞捆绑</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;font-size:14px;line-height:1.9">
+          <div><strong>会员咨询</strong><br /><span style="color:var(--ink-2)">日常问答与交流，合理使用内不限条数，不含实施。</span></div>
+          <div><strong>产品售后</strong><br /><span style="color:var(--ink-2)">买产品/远程服务后，一个月内约定范围内免费修问题。</span></div>
+          <div><strong>付费知识 / 工具</strong><br /><span style="color:var(--ink-2)">单独定价单独交付，买断归你，不随会员到期失效。</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section white" style="padding-top:0">
+  <!-- ============ 开通通道 ============ -->
+  <section class="section white" id="contact" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">JOIN</div>
+          <h2 class="h-section" style="margin-top:10px">开通方式</h2>
+          <p class="sub" style="margin-top:12px">
+            支付通道接入前：点上面「开通 PLUS」，或直接从下面任一通道联系我，
+            付款后拉你进会员社群，当天生效。
+          </p>
+        </div>
+      </div>
+      <ContactChannels />
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section light" style="padding-top:0">
     <div class="wrap wrap-narrow">
       <h2 class="h-3 rv" style="margin-bottom:10px">常见问题</h2>
       <div class="prose rv" style="--d:.08s">
-        <h3 style="font-size:1.05rem">什么时候上线？</h3>
-        <p>
-          支付通道（国内爱发电 / 海外国际通道）接好后第一时间开放，消息会先在
-          <a href="https://www.douyin.com/user/MS4wLjABAAAA8OZfJY3sBzdYY5wIRLrnhvYoA5WofWH6flHqBoywcbQ" target="_blank" rel="noopener">抖音</a>公布。
-        </p>
-        <h3 style="font-size:1.05rem">订阅里具体有什么？</h3>
-        <p>
-          见上方清单。核心是 <a href="/works/prompt-vault/">Prompt 资产库</a>：所有提示词、模板、手册的完整可运行版本。
-        </p>
-        <h3 style="font-size:1.05rem">不等上线，现在能白嫖什么？</h3>
-        <p>
-          <a href="/works/suture-workflow/">缝合怪六步工作流</a>全文免费；
-          <a href="https://github.com/banana2004828" target="_blank" rel="noopener">GitHub</a>
-          上四个开源仓库随便用。先看清楚再决定，是我的原则。
-        </p>
+        <h3 style="font-size:1.05rem">会员能看所有付费资料和工具吗？</h3>
+        <p>不能。这是刻意设计的：知识产品单独买、工具单独买、会员买咨询服务。谁的权益都清清楚楚，不搞交叉捆绑。</p>
+        <h3 style="font-size:1.05rem">会员提问有次数限制吗？</h3>
+        <p>没有机械限制。合理使用范围内持续交流，按正常服务时间回复，不承诺 24 小时即时响应。</p>
+        <h3 style="font-size:1.05rem">会员到期后，之前买的知识产品和工具还在吗？</h3>
+        <p>在。你独立购买的数字产品按购买时的授权规则交付，不因会员到期失效。会员到期只是咨询服务和社群 access 停止。</p>
+        <h3 style="font-size:1.05rem">会员包含远程操作和项目搭建吗？</h3>
+        <p>不包含。这些属于<a href="/services/">一对一项目服务</a>，按项目单独收费（88 元起）。</p>
       </div>
     </div>
   </section>

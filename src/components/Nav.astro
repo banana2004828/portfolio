@@ -5,6 +5,14 @@ const active = (p: string) =>
   p === '/' ? path === '/' : path.startsWith(p);
 const linkStyle = (p: string) =>
   active(p) ? 'color:#fff' : '';
+const links = [
+  { href: '/', full: '首页', short: '首页' },
+  { href: '/knowledge/', full: '知识库', short: '知识' },
+  { href: '/works/', full: '工具库', short: '工具' },
+  { href: '/subscribe/', full: '会员', short: '会员' },
+  { href: '/services/', full: '一对一服务', short: '服务' },
+  { href: '/about/', full: '关于', short: '关于' },
+];
 ---
 
 <div class="nav-shell">
@@ -14,11 +22,32 @@ const linkStyle = (p: string) =>
       <span>{SITE.name}</span>
     </a>
     <div class="nav-links">
-      <a href="/" style={linkStyle('/')}>首页</a>
-      <a href="/services/" style={linkStyle('/services')}>服务</a>
-      <a href="/works/" style={linkStyle('/works')}>工具库</a>
-      <a href="/about/" style={linkStyle('/about')}>关于</a>
+      {links.map((l) => (
+        <a href={l.href} style={linkStyle(l.href)} class:list={[{ 'nav-home': l.href === '/' }]}>
+          <span class="nav-full">{l.full}</span>
+          <span class="nav-short">{l.short}</span>
+        </a>
+      ))}
     </div>
-    <a class="nav-cta" href="/subscribe/" data-mag>订阅</a>
+    <a class="nav-cta" href="/subscribe/" data-mag>会员</a>
   </nav>
 </div>
+
+<style>
+  .nav-short {
+    display: none;
+  }
+  @media (max-width: 700px) {
+    .nav-full {
+      display: none;
+    }
+    .nav-short {
+      display: inline;
+    }
+  }
+  @media (max-width: 560px) {
+    .nav-home {
+      display: none !important;
+    }
+  }
+</style>
