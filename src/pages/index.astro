@@ -93,29 +93,35 @@ const stats = [
       </div>
       <div class="grid-cards">
         {[
-          { en: 'KNOWLEDGE', cn: '知识产品', desc: '学习教程，获取实用资料。免费区随便看，付费资料单独买。', href: '/knowledge/', tag: '免费入口', accent: true, price: '¥0 起' },
-          { en: 'TOOLS', cn: '工具资源', desc: '发现和使用实用工具：应用、命令行、Agent 技能，付费工具单独买。', href: '/works/', tag: '免费为主', accent: true, price: '¥0 起' },
-          { en: 'MEMBERSHIP', cn: 'PLUS 会员', desc: '获得持续技术咨询和交流服务，专属会员社群。', href: '/subscribe/', tag: '正式推出', accent: false, price: '¥19.9/月' },
-          { en: '1-ON-1', cn: '项目服务', desc: '一对一教学、项目陪跑、远程协助与定制实施。', href: '/services/', tag: '按项目收费', accent: false, price: '¥88 起' },
+          { en: 'STORE', cn: 'AI 代充小店', desc: 'ChatGPT Plus / Go、Grok、Muse 会员充值：源头供应、24h 自动发货，掉订阅按天数退款。', href: SITE.shop, tag: '核心业务 · 现货热卖', accent: true, price: '¥69 起', ext: true },
+          { en: 'KNOWLEDGE', cn: '知识产品', desc: '学习教程，获取实用资料。免费区随便看，付费资料单独买。', href: '/knowledge/', tag: '免费入口', accent: true, price: '¥0 起', ext: false },
+          { en: 'TOOLS', cn: '工具资源', desc: '发现和使用实用工具：应用、命令行、Agent 技能，付费工具单独买。', href: '/works/', tag: '免费为主', accent: true, price: '¥0 起', ext: false },
+          { en: 'MEMBERSHIP', cn: 'PLUS 会员', desc: '获得持续技术咨询和交流服务，专属会员社群。', href: '/subscribe/', tag: '正式推出', accent: false, price: '¥19.9/月', ext: false },
+          { en: '1-ON-1', cn: '项目服务', desc: '一对一教学、项目陪跑、远程协助与定制实施。', href: '/services/', tag: '按项目收费', accent: false, price: '¥88 起', ext: false },
         ].map((e, i) => (
-          <a class="card card-glare rv" style={`--d:${i * 0.07}s`} data-tilt href={e.href}>
+          <a
+            class="card card-glare rv"
+            style={`--d:${i * 0.07}s`}
+            data-tilt
+            href={e.href}
+            target={e.ext ? '_blank' : undefined}
+            rel={e.ext ? 'noopener' : undefined}
+          >
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
               <span class="chip chip-accent">{e.tag}</span>
               <span class="chip">{e.price}</span>
             </div>
             <div class="eyebrow" style="margin-bottom:6px">{e.en}</div>
-            <h3 class="card-title">{e.cn}</h3>
+            <h3 class="card-title">
+              {e.cn}
+              {e.ext && <span aria-hidden="true"> ↗</span>}
+            </h3>
             <p class="card-tagline">{e.desc}</p>
             <div class="card-foot">
               <span class="link-more">进入 <span aria-hidden="true">→</span></span>
             </div>
           </a>
         ))}
-      </div>
-      <div class="rv" style="--d:.2s;margin-top:30px;display:flex;justify-content:center">
-        <a class="btn btn-primary" href="https://manboweb3.com/r/5K822X" target="_blank" rel="noopener" data-mag>
-          急用会员？AI 小店现货直购 ↗
-        </a>
       </div>
     </div>
   </section>
