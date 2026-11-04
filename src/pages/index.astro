@@ -79,29 +79,27 @@ const stats = [
     </div>
   </section>
 
-  <!-- ================= 商业四入口 ================= -->
+  <!-- ================= 四大主业 ================= -->
   <section class="section light" id="entries">
     <div class="wrap">
       <div class="section-head rv">
         <div>
-          <div class="eyebrow">WHAT I OFFER</div>
+          <div class="eyebrow">WHAT I OFFER · 四大主业</div>
           <h2 class="h-section" style="margin-top:10px">让 AI 工具真正为你所用</h2>
           <p class="sub" style="margin-top:12px">
-            工具、知识、技术服务与项目陪跑，帮助你把想法变成实际成果。
+            代充、账号、API 与技术服务，帮助你把想法变成实际成果。
           </p>
         </div>
       </div>
-      <div class="grid-cards">
+      <div class="pillars">
         {[
-          { en: 'STORE', cn: 'AI 代充小店', desc: '海外账号 + AI 会员充值自营现货：TG 电报号、推特 X、苹果 ID、ChatGPT/Claude 充值，24h 快速发货，掉订阅按天数退款。', href: '/store/', tag: '核心业务 · 自营现货', accent: true, price: '¥17.9 起', ext: false },
-          { en: 'KNOWLEDGE', cn: '知识产品', desc: '学习教程，获取实用资料。免费区随便看，付费资料单独买。', href: '/knowledge/', tag: '免费入口', accent: true, price: '¥0 起', ext: false },
-          { en: 'TOOLS', cn: '工具资源', desc: '发现和使用实用工具：应用、命令行、Agent 技能，付费工具单独买。', href: '/works/', tag: '免费为主', accent: true, price: '¥0 起', ext: false },
-          { en: 'MEMBERSHIP', cn: 'PLUS 会员', desc: '获得持续技术咨询和交流服务，专属会员社群。', href: '/subscribe/', tag: '正式推出', accent: false, price: '¥19.9/月', ext: false },
-          { en: '1-ON-1', cn: '项目服务', desc: '一对一教学、项目陪跑、远程协助与定制实施。', href: '/services/', tag: '按项目收费', accent: false, price: '¥88 起', ext: false },
-          { en: 'API RELAY', cn: 'API 中转', desc: 'Claude / GPT / Gemini / Grok 官方折扣价，OpenAI 兼容，一个 Key 全通，开发者首选。', href: '/api/', tag: '面向开发者', accent: false, price: '官方 1.5 折起', ext: false },
+          { en: 'TOP-UP', cn: 'AI 代充', desc: 'ChatGPT Plus / Go、Grok、Muse 等会员充值，24h 快速发货，掉订阅按天数退款。', href: 'https://manboweb3.com/r/5K822X', tag: '核心业务 · 现货', accent: true, price: '¥69 起', ext: true },
+          { en: 'ACCOUNTS', cn: '海外产品号', desc: 'TG 电报号、推特 X、Instagram、Facebook、苹果 ID……海外账号一站式自营现货。', href: '/store/', tag: '核心业务 · 自营', accent: true, price: '¥17.9 起', ext: false },
+          { en: 'API RELAY', cn: 'API 中转', desc: 'Claude / GPT / Gemini / Grok 官方折扣价，实测不掺水，OpenAI 兼容。', href: '/api/', tag: '面向开发者', accent: false, price: '官方 1.5 折起', ext: false },
+          { en: 'AI SERVICE', cn: 'AI 服务', desc: '一对一教学、项目陪跑、远程协助与定制实施，交付即接入低成本 API。', href: '/services/', tag: '按项目收费', accent: false, price: '¥88 起', ext: false },
         ].map((e, i) => (
           <a
-            class="card card-glare rv"
+            class="card card-glare rv pillar-card"
             style={`--d:${i * 0.07}s`}
             data-tilt
             href={e.href}
@@ -123,6 +121,12 @@ const stats = [
             </div>
           </a>
         ))}
+      </div>
+      <div class="rv" style="--d:.2s;margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <span style="font-size:13px;color:var(--ink-2);align-self:center;margin-right:6px">顺手逛逛：</span>
+        <a class="chip" style="padding:8px 16px;font-size:13px" href="/knowledge/">📚 知识产品库 · 免费教程</a>
+        <a class="chip" style="padding:8px 16px;font-size:13px" href="/works/">🔧 工具产品库 · 免费工具</a>
+        <a class="chip" style="padding:8px 16px;font-size:13px" href="/subscribe/">⭐ PLUS 会员 · 19.9/月 持续咨询</a>
       </div>
     </div>
   </section>
@@ -271,6 +275,16 @@ const stats = [
     @media (max-width: 760px) {
       .follow-grid {
         grid-template-columns: 1fr !important;
+      }
+    }
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+    @media (max-width: 760px) {
+      .pillars {
+        grid-template-columns: 1fr;
       }
     }
   </style>
