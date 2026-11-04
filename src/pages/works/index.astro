@@ -8,8 +8,8 @@ import { getCollection } from 'astro:content';
 const all = (await getCollection('works')).sort(
   (a, b) => a.data.order - b.data.order
 );
-// 工具产品库：应用 / 命令行 / Agent 技能（方法论已独立为知识产品库）
-const toolCats = ['apps', 'cli', 'skills'];
+// 工具产品库：应用 / 命令行 / Agent 技能 / 收录工具（方法论已独立为知识产品库）
+const toolCats = ['apps', 'cli', 'skills', 'curated'];
 const wip = all.filter((w) => w.data.category === 'wip');
 ---
 

@@ -6,7 +6,7 @@ const works = defineCollection({
   schema: z.object({
     title: z.string(),
     tagline: z.string(),
-    category: z.enum(['apps', 'cli', 'skills', 'methodology', 'wip']),
+    category: z.enum(['apps', 'cli', 'skills', 'methodology', 'wip', 'curated']),
     status: z.enum(['oss', 'local', 'free', 'brewing']),
     tags: z.array(z.string()).default([]),
     github: z.string().url().optional(),

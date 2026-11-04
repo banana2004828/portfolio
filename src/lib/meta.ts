@@ -27,6 +27,11 @@ export const CATEGORIES: Record<
     cn: '还在锅里',
     desc: '正在长出来的东西，先立个牌子。',
   },
+  curated: {
+    en: 'CURATED',
+    cn: '收录工具',
+    desc: '第三方好用的工具与资源，本站逐个实测后收录背书。',
+  },
 };
 
 export const STATUS: Record<string, string> = {
