@@ -131,6 +131,41 @@ const stats = [
     </div>
   </section>
 
+  <!-- ================= 宣传片 ================= -->
+  <section class="dark" id="promo" style="padding:clamp(80px,10vw,120px) 0">
+    <div class="wrap promo-grid" style="display:grid;grid-template-columns:1fr auto;gap:clamp(36px,6vw,80px);align-items:center">
+      <div>
+        <div class="eyebrow rv">INTRO VIDEO</div>
+        <h2 class="h-section rv" style="--d:.08s;margin:14px 0 18px;font-size:clamp(1.9rem,4.2vw,2.9rem)">
+          18 秒，看懂<br />我在做什么
+        </h2>
+        <p class="sub rv" style="--d:.16s;max-width:420px">
+          不是 PPT 式的自我介绍，是一支纯代码生成的动态宣传片——
+          我的技术风格，都在这 18 秒里。
+        </p>
+        <ul class="sub rv" style="--d:.22s;list-style:none;padding:0;margin-top:26px;font-size:15px">
+          <li style="padding:5px 0">✓ 代充 / 账号 / API / 服务 一条看完</li>
+          <li style="padding:5px 0">✓ 官方折扣价，全部明码标注</li>
+          <li style="padding:5px 0">✓ 循环播放，随时停下细看</li>
+        </ul>
+      </div>
+      <div class="rv" style="--d:.18s">
+        <div style="width:min(340px,78vw);border-radius:44px;border:10px solid #1c1c20;box-shadow:0 40px 120px rgba(255,150,0,0.22), 0 0 0 2px rgba(255,255,255,0.08);overflow:hidden;position:relative">
+          <video
+            src="/media/sleepless-promo.mp4"
+            poster="/media/promo-poster.jpg"
+            autoplay
+            muted
+            loop
+            playsinline
+            style="width:100%;display:block"
+          ></video>
+          <div style="position:absolute;top:14px;left:50%;transform:translateX(-50%);width:86px;height:22px;background:#1c1c20;border-radius:12px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= 关注矩阵 ================= -->
   <section class="section white" id="follow">
     <div class="wrap">
@@ -274,6 +309,9 @@ const stats = [
     }
     @media (max-width: 760px) {
       .follow-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .promo-grid {
         grid-template-columns: 1fr !important;
       }
     }
