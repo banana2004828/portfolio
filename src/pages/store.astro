@@ -1,0 +1,177 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactChannels from '../components/ContactChannels.astro';
+import { STORE_GROUPS } from '../lib/store-products';
+
+const totalItems = STORE_GROUPS.reduce((n, g) => n + g.items.length, 0);
+---
+
+<Base title="自营号店" description="笨蛋号铺：海外账号商城——TG 电报号、推特 X、Instagram、Facebook、谷歌邮箱、苹果 ID、Discord、AI 会员充值。卡密发货，微信/QQ/TG 下单。">
+  <!-- ============ 店铺头（深色） ============ -->
+  <header class="dark" style="padding:150px 0 60px">
+    <div class="wrap">
+      <div style="text-align:center;max-width:720px;margin-inline:auto">
+        <div class="eyebrow rv in">SLEEPLESS SHOP · 自营号店</div>
+        <h1 class="h-display rv in" style="font-size:clamp(2.2rem,5.4vw,3.8rem);margin-top:14px">
+          笨蛋号铺 <span class="grad-text">海外账号商店</span>
+        </h1>
+        <p class="sub rv in" style="margin-top:16px">
+          国外软件账号一站式现货：TG 电报号 · 推特 X · Instagram · Facebook · Gmail · 苹果 ID · Discord · AI 会员充值。
+          现货 {totalItems}+ 款，下单即发。
+        </p>
+      </div>
+
+      <!-- 公告栏 -->
+      <div class="rv in" style="max-width:820px;margin:36px auto 0;display:grid;gap:10px">
+        <div style="background:rgba(255,179,0,.08);border:1px solid rgba(255,179,0,.35);border-radius:14px;padding:16px 20px;font-size:14px;line-height:1.9;color:rgba(245,245,247,.85)">
+          📢 <strong style="color:var(--accent)">公告</strong> · ①
+          虚拟商品，拍下前看清规格；发货后请当场验收，无法登录等问题 <strong>30 分钟内</strong>联系客服处理。
+          ② 库存实时变动，下单前请先跟客服确认。 ③ 批发 / 长期拿货价格更美，联系客服谈。
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 20px;font-size:14px;line-height:1.9;color:rgba(245,245,247,.75)">
+          🛒 <strong>下单流程</strong> · 点商品「购买」按钮 → 自动复制商品名和价格 → 微信 / QQ / Telegram 粘贴给客服 → 付款 → 发货。
+          当前为人工快速发货（通常 10 分钟内），自动发货系统接入后此页面同步更新。
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ 分类 + 商品 ============ -->
+  <section class="section light" style="padding-top:56px">
+    <div class="wrap">
+      <!-- 分类芯片 -->
+      <div class="rv" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px" id="cat-tabs">
+        <button class="btn btn-ghost-dark" style="padding:9px 18px;font-size:13.5px" data-cat="all">全部</button>
+        {STORE_GROUPS.map((g) => (
+          <button class="btn btn-ghost-dark" style="padding:9px 18px;font-size:13.5px" data-cat={g.id}>
+            {g.name} <span style="opacity:.55">{g.items.length}</span>
+          </button>
+        ))}
+      </div>
+
+      <!-- 商品分组 -->
+      <div style="display:grid;gap:56px" id="goods">
+        {STORE_GROUPS.map((g) => (
+          <div data-group={g.id} style="scroll-margin-top:120px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+              <h2 class="h-3">{g.name}</h2>
+              <span class="count-badge">{g.items.length} 款在售</span>
+            </div>
+            <div class="grid-cards" style="grid-template-columns:repeat(auto-fill,minmax(270px,1fr))">
+              {g.items.map((it) => (
+                <div class="card card-glare" data-tilt style="padding:20px;display:flex;flex-direction:column;gap:10px">
+                  <div style="display:flex;gap:6px;flex-wrap:wrap">
+                    {it.hot && <span class="chip chip-accent" style="font-size:11px;padding:3px 10px">🔥 热卖</span>}
+                    <span class="chip" style="font-size:11px;padding:3px 10px">有货</span>
+                  </div>
+                  <div style="font-size:13.5px;font-weight:600;line-height:1.6;flex:1">{it.name}</div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+                    <div style="font-size:21px;font-weight:800;color:var(--ink)">¥{it.price}</div>
+                    <button
+                      class="btn btn-primary"
+                      style="padding:8px 18px;font-size:13px"
+                      data-buy={it.name + ' ¥' + it.price}
+                    >购买</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 更多品类 -->
+      <div class="rv" style="margin-top:48px;text-align:center">
+        <span class="chip" style="font-size:13px;padding:10px 22px">
+          还有更多品类与批发价：刷粉服务 · TG 代理 · Threads · Snapchat · TK 千粉号 —— 联系客服询价
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 下单与售后 ============ -->
+  <section class="section white" style="padding-top:0">
+    <div class="wrap" style="max-width:900px">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">HOW TO BUY</div>
+          <h2 class="h-section" style="margin-top:10px">下单与售后</h2>
+        </div>
+      </div>
+      <div style="display:grid;gap:18px">
+        <div class="card rv">
+          <div class="chip chip-accent" style="margin-bottom:12px">下单四步</div>
+          <div style="font-size:14.5px;line-height:2.2">
+            ① 挑商品，点「购买」（自动复制商品名和价格）<br />
+            ② 微信 / QQ / Telegram 粘贴给客服，确认有货<br />
+            ③ 按客服提供的收款方式付款<br />
+            ④ 收到卡密 / 账号，当场登录验收
+          </div>
+        </div>
+        <div class="card rv" style="--d:.08s">
+          <div class="chip" style="margin-bottom:12px">售后规则 · 丑话说在前面</div>
+          <div style="font-size:14px;line-height:2.1;color:var(--ink-2)">
+            · 虚拟商品，性质特殊：<strong style="color:var(--ink)">发货后 30 分钟内验收</strong>，无法登录 / 与描述不符，免费补换；<br />
+            · 超时反馈、人为原因（改密违规操作等）导致的封禁不售后；<br />
+            · 商品标注的规格即售后依据，「无售后」标注商品拍下视为接受；<br />
+            · 出货后不退不换，下单即视为同意以上规则。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 联系通道 ============ -->
+  <section class="section light" id="contact" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">CONTACT</div>
+          <h2 class="h-section" style="margin-top:10px">客服通道 · 10 分钟内发货</h2>
+          <p class="sub" style="margin-top:12px">微信 / QQ 常驻在线，海外客户走 Telegram，抖音私信也行。</p>
+        </div>
+      </div>
+      <ContactChannels />
+    </div>
+  </section>
+</Base>
+
+<script>
+  // 分类筛选
+  document.querySelectorAll<HTMLButtonElement>('#cat-tabs [data-cat]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cat = btn.getAttribute('data-cat');
+      document.querySelectorAll<HTMLElement>('#goods [data-group]').forEach((g) => {
+        const show = cat === 'all' || g.getAttribute('data-group') === cat;
+        g.style.display = show ? '' : 'none';
+      });
+      document.querySelectorAll<HTMLButtonElement>('#cat-tabs [data-cat]').forEach((b) => {
+        b.style.background = b === btn ? 'var(--ink)' : '';
+        b.style.color = b === btn ? '#fff' : '';
+        b.style.borderColor = b === btn ? 'var(--ink)' : '';
+      });
+    });
+  });
+
+  // 购买 = 复制商品名和价格
+  document.querySelectorAll<HTMLButtonElement>('[data-buy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.getAttribute('data-buy') || '';
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      const orig = btn.textContent;
+      btn.textContent = '已复制 ✓ 去粘贴给客服';
+      setTimeout(() => {
+        btn.textContent = orig;
+      }, 2200);
+    });
+  });
+</script>
