@@ -52,8 +52,8 @@ export const SITE = {
   telegramHandle: '@rolrrncnlpeil',
   apiRelay: 'https://wuxianapi.xyz',
   apiRelaySignup: 'https://wuxianapi.xyz/sign-up',
-  // 在线客服：填 Tawk.to 嵌入地址（embed.tawk.to/xxx/xxx）后自动启用，留空则隐藏
-  chatEmbed: '',
+  // 在线客服：Tawk.to 嵌入地址（已启用），清空则隐藏
+  chatEmbed: 'https://embed.tawk.to/6aeb4fe3ce070a3c36418c1e/1k6jj04n1',
 };
 
 export const SERVICES = [
