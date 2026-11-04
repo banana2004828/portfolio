@@ -5,14 +5,16 @@ const active = (p: string) =>
   p === '/' ? path === '/' : path.startsWith(p);
 const linkStyle = (p: string) =>
   active(p) ? 'color:#fff' : '';
+// 导航主体：号店 + 四大业务入口（AI 代充走右侧高亮主按钮）
 const links = [
-  { href: '/', full: '首页', short: '首页' },
-  { href: '/knowledge/', full: '知识库', short: '知识' },
-  { href: '/works/', full: '工具库', short: '工具' },
-  { href: '/subscribe/', full: '会员', short: '会员' },
-  { href: '/services/', full: '一对一服务', short: '服务' },
-  { href: '/api/', full: 'API 中转', short: 'API' },
-  { href: '/about/', full: '关于', short: '关于' },
+  { href: '/', full: '首页', short: '首页', opt: false },
+  { href: '/store/', full: '号店', short: '号店', opt: false },
+  { href: '/api/', full: 'API 中转', short: 'API', opt: false },
+  { href: '/services/', full: '一对一服务', short: '服务', opt: false },
+  { href: '/subscribe/', full: '会员', short: '会员', opt: false },
+  { href: '/knowledge/', full: '知识库', short: '知识', opt: true },
+  { href: '/works/', full: '工具库', short: '工具', opt: true },
+  { href: '/about/', full: '关于', short: '关于', opt: true },
 ];
 ---
 
@@ -24,13 +26,17 @@ const links = [
     </a>
     <div class="nav-links">
       {links.map((l) => (
-        <a href={l.href} style={linkStyle(l.href)} class:list={[{ 'nav-home': l.href === '/' }]}>
+        <a
+          href={l.href}
+          style={linkStyle(l.href)}
+          class:list={[{ 'nav-home': l.href === '/', 'nav-opt': l.opt }]}
+        >
           <span class="nav-full">{l.full}</span>
           <span class="nav-short">{l.short}</span>
         </a>
       ))}
     </div>
-    <a class="nav-cta" href="/store/" data-mag>自营小店</a>
+    <a class="nav-cta" href="https://manboweb3.com/r/5K822X" target="_blank" rel="noopener" data-mag>AI 代充</a>
   </nav>
 </div>
 
@@ -38,7 +44,7 @@ const links = [
   .nav-short {
     display: none;
   }
-  @media (max-width: 700px) {
+  @media (max-width: 760px) {
     .nav-full {
       display: none;
     }
@@ -47,7 +53,8 @@ const links = [
     }
   }
   @media (max-width: 560px) {
-    .nav-home {
+    .nav-home,
+    .nav-opt {
       display: none !important;
     }
   }
