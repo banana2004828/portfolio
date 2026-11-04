@@ -156,24 +156,6 @@ export const STORE_GROUPS: StoreGroup[] = [
     ],
   },
   {
-    id: 'ai',
-    name: 'AI 会员充值',
-    items: [
-      { name: "GPT Go 充值月卡卡密(卡付)", price: 78.9, hot: false },
-      { name: "Claude Max 5X 充值月卡 (美区卡付)", price: 1420.9, hot: false },
-      { name: "Claude Max 20X 充值月卡 (美区卡付)", price: 2863.9, hot: false },
-      { name: "ChatGPT Plus 菲区半价优惠代充卡密", price: 125.9, hot: false },
-      { name: "Suno Premier 自助充值月卡", price: 416.9, hot: false },
-      { name: "Grok·X·Cursor 三合一订阅 Plus 月卡", price: 114.9, hot: false },
-      { name: "Grok·X·Cursor 三合一订阅 Premium 月卡", price: 426.9, hot: false },
-      { name: "Grok·X·Cursor 三合一订阅 Super 月卡", price: 1381.9, hot: false },
-      { name: "Grok·X·Cursor 三合一订阅 Ultra 月卡", price: 2746.9, hot: false },
-      { name: "GPT PRO 50X 埃及区充值1个月(500刀版本)", price: 5769.9, hot: false },
-      { name: "GPT PRO 5X 埃及区充值1个月", price: 1176.9, hot: false },
-      { name: "GPT 50X PRO 充值卡密(iOS美区质保)", price: 6022.9, hot: false },
-    ],
-  },
-  {
     id: 'discord',
     name: 'Discord 账号',
     items: [
