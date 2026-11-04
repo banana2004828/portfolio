@@ -1,143 +1,189 @@
 ---
 import Base from '../layouts/Base.astro';
 import ContactChannels from '../components/ContactChannels.astro';
-import { RELAY_GROUPS } from '../lib/api-relay';
+import { SITE } from '../lib/meta';
 
-const totalChannels = RELAY_GROUPS.reduce((n, g) => n + g.channels.length, 0);
+// 引流展示款：只放知名系列，全部模型注册后站内可见
+const SHOWCASE = [
+  {
+    series: 'Claude 系列',
+    desc: '写作 / 编程主力，官方对接 + 特惠渠道',
+    rows: [
+      { name: 'Claude 官方正价渠道', tag: '🟢 稳定推荐', mult: '1.05×', note: '官方同价级，支付宝直充免海外卡' },
+      { name: 'Claude 特惠渠道', tag: '🟡 性价比', mult: '0.15×', note: '官方 1.5 折，跑量首选' },
+    ],
+  },
+  {
+    series: 'GPT 系列',
+    desc: '全系号池，均有不降智标注',
+    rows: [
+      { name: 'GPT 稳定不降智', tag: '🟢 稳定推荐', mult: '0.30×', note: '稳定优先，原版体验' },
+      { name: 'GPT 特惠 TEAM 池', tag: '🟡 性价比', mult: '0.10×', note: '官方 1 折，批量任务' },
+    ],
+  },
+  {
+    series: 'Gemini / Grok / DeepSeek / GLM',
+    desc: '热门模型全覆盖，按量计费',
+    rows: [
+      { name: 'Gemini 聊天池', tag: '🟡 性价比', mult: '0.50×', note: '生图约 0.135 元/张' },
+      { name: 'GROK 官方号池', tag: '🟡 性价比', mult: '0.13×', note: 'Grok 全系模型' },
+      { name: 'DeepSeek 满血', tag: '🟢 稳定推荐', mult: '0.18×', note: '按次约 0.015 元/次' },
+      { name: '智普 GLM', tag: '🟢 稳定推荐', mult: '0.15×', note: '国内直连' },
+    ],
+  },
+];
 
 const CODE_SAMPLE = `<span style="color:#8a8a93">from</span> openai <span style="color:#8a8a93">import</span> OpenAI<br/>
 <br/>
 client = OpenAI(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;api_key=<span style="color:#ffb300">"你收到的 KEY"</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;base_url=<span style="color:#ffb300">"开通后提供的接入地址"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;api_key=<span style="color:#ffb300">"sk-你在站内生成的 KEY"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;base_url=<span style="color:#ffb300">"https://wuxianapi.xyz"</span>,<br/>
 )<br/>
 <br/>
 resp = client.chat.completions.create(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;model=<span style="color:#ffb300">"渠道对应的模型名"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;model=<span style="color:#ffb300">"claude-sonnet-4-5"</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;messages=[{<span style="color:#ffb300">"role"</span>: <span style="color:#ffb300">"user"</span>, <span style="color:#ffb300">"content"</span>: <span style="color:#ffb300">"你好"</span>}],<br/>
 )
 `;
 ---
 
-<Base title="API 中转" description="AI API 中转通道：Claude / GPT / Gemini / Grok / DeepSeek 官方折扣价，OpenAI 兼容接入，支付宝直充，实测不掺水。">
+<Base title="API 中转" description="Claude / GPT / Gemini 官方折扣价 API：实测不掺水，OpenAI 兼容，注册即用，支付宝直充。">
   <header class="dark" style="padding:160px 0 80px;text-align:center">
     <div class="wrap wrap-narrow">
       <div class="eyebrow rv in">API RELAY · 开发者通道</div>
-      <h1 class="h-display rv in" style="font-size:clamp(2.2rem,5.4vw,4rem);margin-top:14px">
-        官方折扣价，<br />用上<span class="grad-text">所有大模型</span>。
+      <h1 class="h-display rv in" style="font-size:clamp(1.8rem,4.5vw,3rem);margin-top:14px">
+        Claude、GPT <span style="white-space:nowrap">官方折扣价</span>，<br /><span class="grad-text">实测不掺水</span>。
       </h1>
       <p class="sub rv in" style="margin:20px auto 0;max-width:600px">
-        Claude · GPT · Gemini · Grok · DeepSeek · GLM，{totalChannels}
-        个渠道一个 Key 全通。OpenAI 兼容格式，改两行配置就能用；
-        支付宝 / 微信直充，不需要海外信用卡。
+        行业评测近半数中转站存在掉包掺水——这里的每个渠道都实测过后才上架。
+        注册即用，OpenAI 兼容，支付宝 / 微信直充，1.5 折起。
       </p>
       <div class="hero-ctas rv in" style="--d:.2s;margin-top:30px;justify-content:center">
-        <a class="btn btn-primary" href="#contact" data-mag>开通 Key</a>
-        <a class="btn btn-ghost-light" href="#channels">先看价格表</a>
+        <a class="btn btn-primary" href={SITE.apiRelay} target="_blank" rel="noopener" data-mag>立即注册开通 ↗</a>
+        <a class="btn btn-ghost-light" href="#showcase">先看价格</a>
       </div>
+      <p class="rv in" style="--d:.28s;margin-top:16px;font-size:12.5px;color:rgba(245,245,247,.45)">
+        注册后自动开通，充值拿 Key 全程自助，无需等待
+      </p>
     </div>
   </header>
 
-  <!-- ============ 倍率是什么 ============ -->
+  <!-- ============ 不掺水对比 ============ -->
   <section class="section light" style="padding-bottom:0">
     <div class="wrap" style="max-width:900px">
       <div class="card rv">
-        <div class="chip chip-accent" style="margin-bottom:12px">30 秒看懂计费</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;font-size:14.5px;line-height:1.9">
-          <div><strong>倍率</strong><br /><span style="color:var(--ink-2)">相对官方 API 牌价的系数。<code>1.0</code> = 官方原价，<code>0.15</code> = 官方 1.5 折。用多少扣多少。</span></div>
-          <div><strong>为什么有折扣</strong><br /><span style="color:var(--ink-2)">批量渠道拿量转售，差价就是我们的生意——你拿到的永远比官方便宜或同价。</span></div>
-          <div><strong>不掺水承诺</strong><br /><span style="color:var(--ink-2)">行业评测约 46% 的中转站存在掉包掺水。本店渠道逐个实测，标「稳定」的渠道敢承诺不掉包。</span></div>
+        <div class="chip chip-accent" style="margin-bottom:14px">为什么敢说「不掺水」</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;font-size:14.5px;line-height:1.9">
+          <div><strong>行业现状</strong><br /><span style="color:var(--ink-2)">2026 年行业评测：86 家中转站里约 <strong style="color:var(--ink)">46%</strong> 会把请求偷偷换成廉价模型——你付的是 Claude 的钱，跑的是杂牌模型。</span></div>
+          <div><strong>本站做法</strong><br /><span style="color:var(--ink-2)">每个渠道上架前逐个实测：响应质量、稳定性、是否降智，实测记录就是上架依据。<strong style="color:var(--ink)">标「稳定」的渠道，掉了找我们。</strong></span></div>
+          <div><strong>价格透明</strong><br /><span style="color:var(--ink-2)">倍率制公开透明：1.0 = 官方原价，0.1 = 官方 1 折。按实际用量扣费，明细随时可查。</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ 渠道价格表 ============ -->
-  <section class="section light" id="channels" style="padding-top:56px">
+  <!-- ============ 引流款价格 ============ -->
+  <section class="section light" id="showcase" style="padding-top:56px">
     <div class="wrap">
       <div class="section-head rv">
         <div>
-          <div class="eyebrow">CHANNELS · 渠道价格表</div>
-          <h2 class="h-section" style="margin-top:10px">{totalChannels} 个渠道，按需选配</h2>
+          <div class="eyebrow">PRICING · 热门渠道</div>
+          <h2 class="h-section" style="margin-top:10px">知名系列，直接看价</h2>
           <p class="sub" style="margin-top:12px">
-            🟢 = 实测稳定推荐 · 🟡 = 性价比渠道，价格极低但不作稳定承诺。
-            开通后全渠道通用，按实际用量扣费。
+            倍率 = 相对官方 API 牌价的系数（1.0 = 官方原价）。
+            16+ 渠道注册后站内全览，这里只放最有代表性的。
           </p>
         </div>
-        <span class="count-badge">{totalChannels} 个渠道</span>
+        <a class="btn btn-primary" style="padding:11px 24px;font-size:14px" href={SITE.apiRelay} target="_blank" rel="noopener" data-mag>
+          注册查看全部 ↗
+        </a>
       </div>
 
-      {RELAY_GROUPS.map((g) => (
-        <div style="margin-bottom:44px">
-          <div class="rv" style="margin-bottom:14px">
-            <span class="chip chip-accent">{g.group}</span>
-            <span style="font-size:13.5px;color:var(--ink-2);margin-left:10px">{g.desc}</span>
-          </div>
-          <div class="card rv" style="padding:0;overflow:hidden">
-            <div style="display:grid;grid-template-columns:1.6fr .6fr 1fr 1.4fr;gap:12px;padding:14px 22px;background:var(--bg-light);font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--ink-2)" class="relay-head">
-              <span>渠道</span><span>倍率</span><span>稳定性</span><span>适合</span>
-            </div>
-            {g.channels.map((c) => (
-              <div style="display:grid;grid-template-columns:1.6fr .6fr 1fr 1.4fr;gap:12px;padding:14px 22px;border-top:1px solid var(--hairline-light);align-items:center" class="relay-row">
-                <div style="font-weight:650;font-size:14px">{c.name}</div>
-                <div style="font-size:19px;font-weight:800;color:var(--ink)">{c.multiple}</div>
-                <div style="font-size:13px">{c.stability === 'stable' ? '🟢 稳定推荐' : '🟡 性价比池'}</div>
-                <div style="font-size:13px;color:var(--ink-2)">
-                  {c.audience}
-                  {c.perCall && <span style="display:block;font-size:12px;color:var(--accent-deep);font-weight:600">{c.perCall}</span>}
-                </div>
+      <div style="display:grid;gap:24px">
+        {SHOWCASE.map((s) => (
+          <div class="card rv" style="padding:24px 26px">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+              <div>
+                <h3 class="h-3" style="font-size:17px">{s.series}</h3>
+                <div style="font-size:12.5px;color:var(--ink-2);margin-top:2px">{s.desc}</div>
               </div>
-            ))}
+              <a class="btn btn-ghost-dark" style="padding:8px 16px;font-size:12.5px" href={SITE.apiRelay} target="_blank" rel="noopener">进站用这个系列 →</a>
+            </div>
+            <div style="display:grid;gap:10px">
+              {s.rows.map((r) => (
+                <div style="display:grid;grid-template-columns:auto auto 1fr;gap:14px;align-items:center;padding:12px 16px;background:var(--bg-light);border-radius:12px" class="show-row">
+                  <div style="font-weight:650;font-size:14px">{r.name}</div>
+                  <div style="font-size:17px;font-weight:800;color:var(--ink)">{r.mult}</div>
+                  <div style="font-size:12.5px;color:var(--ink-2)">
+                    <span class="chip" style="font-size:11px;padding:2px 10px;margin-right:8px">{r.tag}</span>{r.note}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
-      <p class="sub rv" style="font-size:13px">
-        低价渠道（🟡）价格极低，对应渠道的稳定性上限也低——我们如实标注，不吹不黑。
-        要稳的用 🟢，要省的用 🟡，组合着用最省。
+        ))}
+      </div>
+      <p class="sub rv" style="font-size:13px;margin-top:20px">
+        🟢 = 实测稳定推荐 · 🟡 = 性价比渠道，价格极低但不作稳定承诺。要稳的用 🟢，要省的用 🟡，组合用最省。
       </p>
     </div>
   </section>
 
-  <!-- ============ 接入方式 ============ -->
+  <!-- ============ 三步上手 ============ -->
   <section class="section white">
     <div class="wrap" style="max-width:900px">
       <div class="section-head rv">
         <div>
           <div class="eyebrow">QUICK START</div>
-          <h2 class="h-section" style="margin-top:10px">三步接入，OpenAI 兼容</h2>
+          <h2 class="h-section" style="margin-top:10px">三步上手，全程自助</h2>
         </div>
       </div>
       <div style="display:grid;gap:16px">
         <div class="card rv">
-          <div class="chip chip-accent" style="margin-bottom:12px">第 1 步 · 开通 Key</div>
-          <p class="card-tagline" style="margin:0">通过下方联系通道找客服，告知需要的渠道，付款后发放 API Key 与专属接入地址。</p>
+          <div class="chip chip-accent" style="margin-bottom:12px">第 1 步 · 注册</div>
+          <p class="card-tagline" style="margin:0">
+            点「立即注册」用邮箱注册分站账号，30 秒搞定，无需邀请码。
+          </p>
         </div>
-        <div class="card rv" style="--d:.08s">
-          <div class="chip chip-accent" style="margin-bottom:12px">第 2 步 · 改两行配置</div>
+        <div class="card rv" style="--d:.06s">
+          <div class="chip chip-accent" style="margin-bottom:12px">第 2 步 · 充值拿 Key</div>
+          <p class="card-tagline" style="margin:0">
+            站内支付宝 / 微信充值，选好渠道额度，令牌页面一键生成 API Key。
+          </p>
+        </div>
+        <div class="card rv" style="--d:.12s">
+          <div class="chip chip-accent" style="margin-bottom:12px">第 3 步 · 改两行配置</div>
           <p class="card-tagline" style="margin-bottom:12px">任何支持 OpenAI 格式的工具（ChatBox / NextChat / 自己的代码）都能直接用：</p>
           <div style="background:#141418;color:#f0f0f2;border-radius:14px;padding:18px 22px;font-family:var(--font-mono);font-size:13px;line-height:1.9;overflow-x:auto" set:html={CODE_SAMPLE} />
-        </div>
-        <div class="card rv" style="--d:.16s">
-          <div class="chip chip-accent" style="margin-bottom:12px">第 3 步 · 充值与售后</div>
-          <p class="card-tagline" style="margin:0">
-            余额制：支付宝 / 微信找客服充值，用完随充。用量与扣费明细随时可查；
-            渠道出问题找客服，标「稳定」的渠道我们兜底处理。
-          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ 联系开通 ============ -->
+  <!-- ============ 规则说明 ============ -->
+  <section class="section light" style="padding-top:0">
+    <div class="wrap" style="max-width:900px">
+      <div class="card rv">
+        <div class="chip" style="margin-bottom:12px">使用说明 · 丑话说在前面</div>
+        <div style="font-size:14px;line-height:2.1;color:var(--ink-2)">
+          · 倍率 <strong style="color:var(--ink)">1.0 = 官方原价</strong>，低于 1.0 的渠道来自批量特惠渠道——价格极低，对应稳定性上限也低，我们如实标注不吹不黑；<br />
+          · 🟢 标「稳定推荐」的渠道掉了找我们兜底；🟡 渠道建议跑量任务用，重要生产任务请用 🟢；<br />
+          · 余额制，用多少扣多少，明细站内随时可查；<br />
+          · 接入 / 报错 / 选渠道有任何问题，下方联系通道直接问，会员更享优先答疑。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 咨询售后 ============ -->
   <section class="section light" id="contact" style="padding-top:0">
     <div class="wrap">
       <div class="section-head rv">
         <div>
-          <div class="eyebrow">CONTACT</div>
-          <h2 class="h-section" style="margin-top:10px">开通 Key</h2>
+          <div class="eyebrow">SUPPORT</div>
+          <h2 class="h-section" style="margin-top:10px">咨询与售后</h2>
           <p class="sub" style="margin-top:12px">
-            告诉客服你要的渠道和预估用量，付款后 10 分钟内发 Key。
-            微信 / QQ 常驻，海外走 Telegram。
+            注册和充值全自助，遇到接入问题、渠道选择纠结、报错分析——直接问我们。
           </p>
         </div>
       </div>
@@ -145,33 +191,3 @@ resp = client.chat.completions.create(<br/>
     </div>
   </section>
 </Base>
-
-<style>
-  @media (max-width: 760px) {
-    .relay-head {
-      display: none !important;
-    }
-    .relay-row {
-      grid-template-columns: 1fr auto !important;
-      grid-template-areas:
-        'name mult'
-        'meta meta' !important;
-      row-gap: 6px;
-    }
-    .relay-row > div:nth-child(1) {
-      grid-area: name;
-    }
-    .relay-row > div:nth-child(2) {
-      grid-area: mult;
-      text-align: right;
-    }
-    .relay-row > div:nth-child(3),
-    .relay-row > div:nth-child(4) {
-      grid-area: meta;
-      font-size: 12.5px;
-    }
-    .relay-row > div:nth-child(4) {
-      display: none;
-    }
-  }
-</style>

@@ -50,6 +50,10 @@ export const SITE = {
   wechat: 'wyyyy040828',
   telegram: 'https://t.me/rolrrncnlpeil',
   telegramHandle: '@rolrrncnlpeil',
+  apiRelay: 'https://wuxianapi.xyz',
+  apiRelaySignup: 'https://wuxianapi.xyz/sign-up',
+  // 在线客服：填 Tawk.to 嵌入地址（embed.tawk.to/xxx/xxx）后自动启用，留空则隐藏
+  chatEmbed: '',
 };
 
 export const SERVICES = [
