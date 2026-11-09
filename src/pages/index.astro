@@ -93,10 +93,10 @@ const stats = [
       </div>
       <div class="pillars">
         {[
-          { en: 'TOP-UP', cn: 'AI 代充', desc: 'ChatGPT Plus / Go、Grok、Muse 等会员充值，24h 快速发货，掉订阅按天数退款。', href: 'https://manboweb3.com/r/5K822X', tag: '核心业务 · 现货', accent: true, price: '¥69 起', ext: true },
-          { en: 'ACCOUNTS', cn: '海外产品号', desc: 'TG 电报号、推特 X、Instagram、Facebook、苹果 ID……海外账号一站式自营现货。', href: '/store/', tag: '核心业务 · 自营', accent: true, price: '¥17.9 起', ext: false },
-          { en: 'API RELAY', cn: 'API 中转', desc: 'Claude / GPT / Gemini / Grok 官方折扣价，实测不掺水，OpenAI 兼容。', href: '/api/', tag: '面向开发者', accent: false, price: '官方 1.5 折起', ext: false },
-          { en: 'AI SERVICE', cn: 'AI 服务', desc: '一对一教学、项目陪跑、远程协助与定制实施，交付即接入低成本 API。', href: '/services/', tag: '按项目收费', accent: false, price: '¥88 起', ext: false },
+          { en: 'TOP-UP', cn: 'AI 代充', desc: 'ChatGPT Plus / Go、Grok、Muse 等会员充值，24h 快速发货，掉订阅按天数退款。', href: 'https://manboweb3.com/r/5K822X', tag: '核心业务 · 现货直发', accent: true, price: null, ext: true },
+          { en: 'ACCOUNTS', cn: '海外产品号', desc: 'TG 电报号、推特 X、Instagram、Facebook、苹果 ID……海外账号一站式自营现货。', href: '/store/', tag: '核心业务 · 自营', accent: true, price: null, ext: false },
+          { en: 'API RELAY', cn: 'API 中转', desc: 'Claude / GPT / Gemini / Grok 官方折扣价，实测不掺水，OpenAI 兼容。', href: '/api/', tag: '🆓 可免费试用', accent: false, price: null, ext: false },
+          { en: 'AI SERVICE', cn: 'AI 服务', desc: '一对一教学、项目陪跑、远程协助与定制实施，交付即接入低成本 API。', href: '/services/', tag: '预约制 · 可试', accent: false, price: null, ext: false },
         ].map((e, i) => (
           <a
             class="card card-glare rv pillar-card"
@@ -108,7 +108,7 @@ const stats = [
           >
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
               <span class="chip chip-accent">{e.tag}</span>
-              <span class="chip">{e.price}</span>
+              {e.price && <span class="chip">{e.price}</span>}
             </div>
             <div class="eyebrow" style="margin-bottom:6px">{e.en}</div>
             <h3 class="card-title">
