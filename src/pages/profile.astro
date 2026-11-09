@@ -6,14 +6,24 @@ import { SITE } from '../lib/meta';
 <Base title="个人履历" description="文俊雄（网名：不睡觉变笨蛋）——产品研发经理，AI 应用实践者。武汉轻工大学生物信息学毕业，辅修大数据。AI 应用 / 产品运营 / 业务支持方向。">
   <header class="dark" style="padding:160px 0 80px">
     <div class="wrap" style="display:flex;gap:40px;align-items:center;flex-wrap:wrap">
-      <img
-        class="rv in"
-        src="/images/avatar.jpg"
-        alt="头像"
-        style="width:140px;height:140px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,179,0,.9);box-shadow:0 0 70px rgba(255,160,0,.3)"
-        width="140"
-        height="140"
-      />
+      <div class="rv in" style="position:relative;width:210px;height:150px;flex-shrink:0">
+        <img
+          src="/images/headshot.jpg"
+          alt="证件照"
+          style="width:140px;height:140px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,179,0,.9);box-shadow:0 0 70px rgba(255,160,0,.3);position:relative;z-index:2"
+          width="140"
+          height="140"
+        />
+        <img
+          src="/images/avatar.jpg"
+          alt="日常头像"
+          style="width:96px;height:96px;border-radius:50%;object-fit:cover;border:3px solid rgba(245,245,247,.85);position:absolute;right:-6px;bottom:-10px;z-index:3;box-shadow:0 8px 30px rgba(0,0,0,.4)"
+          width="96"
+          height="96"
+        />
+        <span class="chip chip-accent" style="position:absolute;left:-8px;bottom:-6px;z-index:4;font-size:11px;padding:3px 10px">求职模式 ON</span>
+        <span class="chip" style="position:absolute;right:-14px;top:-4px;z-index:4;font-size:11px;padding:3px 10px;background:#1c1c20;color:var(--paper)">日常模式</span>
+      </div>
       <div style="flex:1;min-width:280px">
         <div class="eyebrow rv in">PROFILE · 个人履历</div>
         <h1 class="h-display rv in" style="font-size:clamp(2.2rem,5vw,3.6rem);margin-top:12px">
