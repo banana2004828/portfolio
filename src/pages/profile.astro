@@ -1,0 +1,212 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/meta';
+---
+
+<Base title="个人履历" description="文俊雄（网名：不睡觉变笨蛋）——产品研发经理，AI 应用实践者。武汉轻工大学生物信息学毕业，辅修大数据。AI 应用 / 产品运营 / 业务支持方向。">
+  <header class="dark" style="padding:160px 0 80px">
+    <div class="wrap" style="display:flex;gap:40px;align-items:center;flex-wrap:wrap">
+      <img
+        class="rv in"
+        src="/images/avatar.jpg"
+        alt="头像"
+        style="width:140px;height:140px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,179,0,.9);box-shadow:0 0 70px rgba(255,160,0,.3)"
+        width="140"
+        height="140"
+      />
+      <div style="flex:1;min-width:280px">
+        <div class="eyebrow rv in">PROFILE · 个人履历</div>
+        <h1 class="h-display rv in" style="font-size:clamp(2.2rem,5vw,3.6rem);margin-top:12px">
+          文俊雄
+          <span style="font-size:0.42em;font-weight:700;color:var(--paper);opacity:.75">· 网名「不睡觉变笨蛋」</span>
+        </h1>
+        <div class="rv in" style="--d:.1s;display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+          <span class="chip chip-accent">21 岁 · 武汉</span>
+          <span class="chip">产品研发经理 @ 光域信息科技</span>
+          <span class="chip">武汉轻工大学 · 生物信息学（辅修大数据）</span>
+        </div>
+        <p class="sub rv in" style="--d:.16s;margin-top:20px;max-width:560px">
+          白天在 SaaS 公司做产品研发，晚上把 AI 玩成生产力。
+          欢迎一切 <strong style="color:var(--paper)">AI 应用 / 产品运营 / 业务支持</strong>方向的机会与合作洽谈。
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ 工作与实习 ============ -->
+  <section class="section light">
+    <div class="wrap" style="max-width:900px">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">EXPERIENCE · 工作与实习</div>
+          <h2 class="h-section" style="margin-top:10px">从投放运营，到产品研发</h2>
+        </div>
+      </div>
+      <div style="display:grid;gap:20px">
+        <div class="card rv" style="padding:28px 30px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+            <span class="chip chip-accent">2026.04 – 至今</span>
+            <span class="chip">光域信息科技有限公司</span>
+            <span class="chip">产品研发经理</span>
+          </div>
+          <h3 class="card-title">小红书投放运营 → 转岗产品研发经理</h3>
+          <p class="card-tagline" style="margin-bottom:0">
+            运营阶段负责聚光平台日常广告投放、客户账户对接及投放数据报表整理。
+            转岗后独立梳理业务需求，使用 AI 辅助完成产品设计、开发迭代与部署交付，支持运营和内部管理。
+          </p>
+        </div>
+        <div class="card rv" style="--d:.08s;padding:28px 30px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+            <span class="chip">2023.07 – 2023.08</span>
+            <span class="chip">武汉动因体育</span>
+            <span class="chip">篮球教练（实习）</span>
+          </div>
+          <h3 class="card-title">青少年篮球教学</h3>
+          <p class="card-tagline" style="margin-bottom:0">
+            负责 8—12 岁青少年篮球教学，累计完成 40+ 课时，帮助 15 名学员掌握基础技能；
+            跟进学习进度并与家长沟通，满意度反馈 95% 以上。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 项目经历 ============ -->
+  <section class="section white" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">PROJECTS · 项目经历</div>
+          <h2 class="h-section" style="margin-top:10px">做过的事，都有下文</h2>
+        </div>
+      </div>
+      <div class="grid-cards">
+        <div class="card card-glare rv" data-tilt>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <span class="chip chip-accent">企业 SaaS</span>
+            <span class="chip">已上线</span>
+          </div>
+          <h3 class="card-title">光域企业 SaaS 系统</h3>
+          <p class="card-tagline">
+            独立设计开发 ERP、CRM 及广告批量投放 SaaS 系统，均已部署至服务器上线可用；
+            同步完成公司官网建设上线与 Logo 设计交付。
+          </p>
+          <p class="card-tagline" style="margin:10px 0 0">
+            另独立开发小红书 SaaS 工作台，整合运营信息整理、达人筛选及日常操作功能，承接业务需求持续迭代。
+          </p>
+        </div>
+        <div class="card card-glare rv" style="--d:.07s" data-tilt>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <span class="chip chip-accent">获客工具</span>
+            <span class="chip">本地开发完成</span>
+          </div>
+          <h3 class="card-title">寻线获客工具</h3>
+          <p class="card-tagline">
+            AI 辅助独立开发：按关键词检索抖音、小红书相关作品，批量导入链接并分组监控公开评论，
+            按包含词 / 排除词筛出潜在客户线索；汇总成线索库，支持去重筛选、跟进状态记录与 CSV/Excel 导出。
+          </p>
+        </div>
+        <div class="card card-glare rv" style="--d:.14s" data-tilt>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <span class="chip chip-accent">自动化实践</span>
+            <a class="chip" href="/works/xiaoxiong-workbench/" style="cursor:pointer">已收录进号店作品 →</a>
+          </div>
+          <h3 class="card-title">个人工具箱与工作台</h3>
+          <p class="card-tagline">
+            独立搭建工具箱与工作台，配置公众号内容与草稿流程、小说辅助创作、GitHub 每日热点整理及美团领券任务，
+            结合人工审核与异常处理持续优化。
+          </p>
+        </div>
+        <div class="card card-glare rv" style="--d:.21s" data-tilt>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <span class="chip chip-accent">生命科学竞赛</span>
+            <span class="chip">团队 84.27 分</span>
+          </div>
+          <h3 class="card-title">红球菌腈代谢关键酶活性预测研究</h3>
+          <p class="card-tagline">
+            5 人团队中承担文献数据提取与清洗、基因组整理与注释、特征整理、模型预测及可视化；
+            研究成果同步用于毕业论文——生物信息学的老本行。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 教育 ============ -->
+  <section class="section light" style="padding-top:0">
+    <div class="wrap" style="max-width:900px">
+      <div class="card rv" style="padding:28px 30px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+          <span class="chip chip-accent">2022.09 – 2026.06</span>
+          <span class="chip">武汉轻工大学 · 本科（已毕业）</span>
+        </div>
+        <h3 class="card-title">生物信息学 · 辅修大数据专业</h3>
+        <p class="card-tagline" style="margin-bottom:0">
+          生命科学 + 数据分析的复合背景：会跑模型、会清洗数据，也把这套「用数据验证结论」的习惯带进了产品和 AI 工作流。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 技能栈 ============ -->
+  <section class="section dark" id="skills">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">SKILLS · 技能栈</div>
+          <h2 class="h-section" style="margin-top:10px">工具箱里都有什么</h2>
+        </div>
+      </div>
+      <div style="display:grid;gap:18px;max-width:900px">
+        <div class="rv">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--accent);margin-bottom:12px">AI 应用与 PROMPT</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <span class="chip" style="padding:9px 16px;font-size:13.5px">ChatGPT 资料理解 / 写作 / 问题分析</span>
+            <span class="chip" style="padding:9px 16px;font-size:13.5px">Prompt 编写与多轮优化（目标 / 约束 / 示例）</span>
+          </div>
+        </div>
+        <div class="rv" style="--d:.08s">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--accent);margin-bottom:12px">多工具与双 AGENT 协作</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            {['Codex', 'DeepSeek Harness', 'ZCode', 'WorkBuddy', 'TRAE', 'Claude Code CLI', 'OpenClaw', 'AutoClaw', 'Hermes'].map((t) => (
+              <span class="chip" style="padding:9px 16px;font-size:13.5px">{t}</span>
+            ))}
+            <span class="chip" style="padding:9px 16px;font-size:13.5px">双 Agent 分工 / 互审 / 反馈修正</span>
+          </div>
+        </div>
+        <div class="rv" style="--d:.16s">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--accent);margin-bottom:12px">质量检查与数据处理</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            {['AI 输出相关性 / 一致性 / 完整性检查', 'Python · Pandas · NumPy', 'R', 'Linux', 'SPSS', 'Office 数据与可视化'].map((t) => (
+              <span class="chip" style="padding:9px 16px;font-size:13.5px">{t}</span>
+            ))}
+          </div>
+        </div>
+        <div class="rv" style="--d:.24s">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--accent);margin-bottom:12px">证书与素养</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <span class="chip" style="padding:9px 16px;font-size:13.5px">大学英语四级</span>
+            <span class="chip" style="padding:9px 16px;font-size:13.5px">自主学习 · 需求拆解 · 沟通协作 · 持续复盘</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 机会与合作 ============ -->
+  <section class="section white" style="padding-top:0">
+    <div class="wrap" style="max-width:900px">
+      <div class="card rv" style="padding:28px 30px;border:2px solid var(--accent)">
+        <div class="chip chip-accent" style="margin-bottom:12px">机会与合作</div>
+        <p class="card-tagline" style="margin:0 0 16px">
+          欢迎一切 <strong style="color:var(--ink)">AI 应用 / 产品运营 / 业务支持</strong>方向的机会与合作洽谈；
+          也接 AI 项目的一对一教学与远程定制。想聊，走下面的通道最快。
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn btn-primary" style="padding:11px 24px;font-size:14px" href="/services/#contact">联系通道</a>
+          <a class="btn btn-ghost-dark" style="padding:11px 24px;font-size:14px" href="/about/">先了解这个人 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
